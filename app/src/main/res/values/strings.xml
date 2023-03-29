@@ -4,4 +4,10 @@
     <string name="my_artist_fragment">my_artist_fragment</string>
 
 
+    <string name="recommend_track_menu">Recommend</string>
+    <string name="my_artist_menu">Artist</string>
+<!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
+<!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
+
+
 </resources>

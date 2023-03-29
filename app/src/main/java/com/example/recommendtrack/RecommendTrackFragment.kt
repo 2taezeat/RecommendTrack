@@ -24,7 +24,7 @@ class RecommendTrackFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             RecommendTrackFragment().apply {
                 arguments = Bundle().apply {
 

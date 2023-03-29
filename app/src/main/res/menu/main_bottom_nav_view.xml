@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/RecommendTrackFragment"
+        android:enabled="true"
+        android:title="@string/recommend_track_menu"
+        />
+
+
+    <item
+        android:id="@+id/MyArtistFragment"
+        android:enabled="true"
+        android:title="@string/my_artist_menu"
+        />
+
+</menu>
