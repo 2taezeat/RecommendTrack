@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RecommendTrack</string>
     <string name="recommend_track_fragment">recommend_track_fragment</string>
+    <string name="my_artist_fragment">my_artist_fragment</string>
 
 
 </resources>
