@@ -8,13 +8,13 @@
 
     <fragment
         android:id="@+id/RecommendTrackFragment"
-        android:name="com.example.recommendtrack.RecommendTrackFragment"
+        android:name="com.example.recommendtrack.presentation.ui.recommendtrack.RecommendTrackFragment"
         android:label="@string/recommend_track_fragment"
         tools:layout="@layout/fragment_recommend_track" />
 
     <fragment
         android:id="@+id/ArtistFragment"
-        android:name="com.example.recommendtrack.ArtistFragment"
+        android:name="com.example.recommendtrack.presentation.ui.artist.ArtistFragment"
         android:label="@string/artist_fragment"
         tools:layout="@layout/fragment_artist" />
 
