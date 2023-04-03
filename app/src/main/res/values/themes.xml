@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
 
         <item name="android:windowSplashScreenBackground">@color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/avd_anim</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_anim</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
 
 

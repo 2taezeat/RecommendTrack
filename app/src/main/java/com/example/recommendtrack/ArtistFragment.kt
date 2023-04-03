@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.recommendtrack.databinding.FragmentRecommendTrackBinding
+import androidx.fragment.app.viewModels
+import com.example.recommendtrack.databinding.FragmentArtistBinding
 
 
-class RecommendTrackFragment : BaseFragment<FragmentRecommendTrackBinding>(R.layout.fragment_recommend_track, RecommendTrackViewModel().javaClass) {
+class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist, ArtistViewModel().javaClass) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,15 +20,13 @@ class RecommendTrackFragment : BaseFragment<FragmentRecommendTrackBinding>(R.lay
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("viewModel_RecommendTrackFragment", "${viewModel}")
+        Log.d("viewModel_ArtistFragment", "${viewModel}")
     }
 
 
-
     companion object {
-
         fun newInstance() =
-            RecommendTrackFragment().apply {
+            ArtistFragment().apply {
                 arguments = Bundle().apply {
 
                 }
