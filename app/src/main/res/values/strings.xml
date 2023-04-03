@@ -2,14 +2,15 @@
     <string name="app_name">RecommendTrack</string>
     <string name="recommend_track_fragment">recommend_track_fragment</string>
     <string name="artist_fragment">artist_fragment</string>
+    <string name="genre_fragment">genre_fragment</string>
 
 
     <string name="recommend_track_menu">Recommend</string>
     <string name="artist_menu">Artist</string>
     <string name="song_menu">Song</string>
+    <string name="genre_menu">Genre</string>
     <string name="setting_menu">Setting</string>
 
-<!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 
 

@@ -15,4 +15,10 @@
         android:title="@string/artist_menu"
         />
 
+    <item
+        android:id="@+id/GenreFragment"
+        android:enabled="true"
+        android:title="@string/genre_menu"
+        />
+
 </menu>
