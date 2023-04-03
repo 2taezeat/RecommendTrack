@@ -10,16 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int, private val vmClass : Class<ViewModel>) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
     private var _binding: T? = null
     protected val binding
         get() = requireNotNull(_binding)
-
-    val viewModel by lazy {
-        ViewModelProvider(this)[vmClass]
-    }
-
 
 
     override fun onCreateView(

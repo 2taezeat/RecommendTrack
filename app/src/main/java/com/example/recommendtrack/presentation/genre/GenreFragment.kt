@@ -3,13 +3,16 @@ package com.example.recommendtrack.presentation.ui.artist
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.example.recommendtrack.R
+import com.example.recommendtrack.data.dto.Genre
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.databinding.FragmentGenreBinding
 import com.example.recommendtrack.presentation.ui.BaseFragment
 
 
-class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre, ArtistViewModel().javaClass) {
+class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
+    private val viewModel by viewModels<GenreViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
