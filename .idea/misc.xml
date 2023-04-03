@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/avd_anim.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/splash_anim.xml" value="0.276" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16843971631205673" />
         <entry key="app/src/main/res/layout/fragment_artist.xml" value="0.2672239108409321" />
         <entry key="app/src/main/res/layout/fragment_my_artist.xml" value="0.22192028985507245" />
