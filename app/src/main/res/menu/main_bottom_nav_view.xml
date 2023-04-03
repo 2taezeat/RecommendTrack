@@ -10,9 +10,9 @@
 
 
     <item
-        android:id="@+id/MyArtistFragment"
+        android:id="@+id/ArtistFragment"
         android:enabled="true"
-        android:title="@string/my_artist_menu"
+        android:title="@string/artist_menu"
         />
 
 </menu>
