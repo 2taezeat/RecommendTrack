@@ -1,6 +1,6 @@
 package com.example.recommendtrack.data.dto
 
 
-data class Genre(
+data class GenresDto(
     val genres: List<String>
 )
