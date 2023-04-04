@@ -8,8 +8,10 @@ import com.example.recommendtrack.domain.repository.GenreRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class GenreRepositoryImp(private val dataSource: GenreRemoteDataSource) : GenreRepository {
+class GenreRepositoryImp
+@Inject constructor(private val dataSource: GenreRemoteDataSource) : GenreRepository {
     override suspend fun fetchGenres(): Flow<List<Genre>> {
         return dataSource.fetchGenres().map { genresDto -> genresDto.asDomain() }
     }
