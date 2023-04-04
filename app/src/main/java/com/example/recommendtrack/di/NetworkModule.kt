@@ -1,5 +1,6 @@
 package com.example.recommendtrack.di
 
+import com.example.recommendtrack.data.remote.GenreApi
 import com.example.recommendtrack.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -35,5 +36,12 @@ object NetworkModule {
             .baseUrl(BASE_URL)
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideGenreApi(retrofit: Retrofit): GenreApi {
+        return retrofit.create(GenreApi::class.java)
+    }
+
 
 }
