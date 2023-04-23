@@ -14,9 +14,5 @@ interface TokenApi {
         @Field("client_secret") clientSecret: String
     ): ApiResponse<TokenDto>
 
-//    @POST("api/token")
-//    suspend fun getToken(
-//        @Body requestToken: RequestToken
-//    ): ApiResponse<TokenDto>
 
 }

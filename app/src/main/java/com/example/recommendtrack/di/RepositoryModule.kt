@@ -14,45 +14,6 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
-//@Module
-//@InstallIn(SingletonComponent::class)
-//object RepositoryModule {
-//
-////    @Singleton
-////    @Provides
-////    fun providesGenreRepository(
-////        repository: GenreRepository
-////    ): GenreRepository {
-////        return repository
-////    }
-//
-//
-////    @Singleton
-////    @Provides
-////    fun providesTokenRepository(
-////        repository: TokenRepository
-////    ): TokenRepository {
-////        return repository
-////    }
-//
-//
-//    @Singleton
-//    @Provides
-//    fun providesGenreRepository(
-//        dataSource: GenreRemoteDataSource
-//    ): GenreRepository {
-//        return GenreRepositoryImp(dataSource)
-//    }
-//
-//
-//    @Singleton
-//    @Provides
-//    fun providesTokenRepository(
-//        dataSource: TokenRemoteDataSource
-//    ): TokenRepository {
-//        return TokenRepositoryImp(dataSource)
-//    }
-//}
 
 @Module
 @InstallIn(SingletonComponent::class)
