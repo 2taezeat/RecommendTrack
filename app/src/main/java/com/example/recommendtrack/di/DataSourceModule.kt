@@ -2,6 +2,8 @@ package com.example.recommendtrack.di
 
 import com.example.recommendtrack.data.datasource.GenreRemoteDataSource
 import com.example.recommendtrack.data.datasource.GenreRemoteDataSourceImp
+import com.example.recommendtrack.data.datasource.TokenRemoteDataSource
+import com.example.recommendtrack.data.datasource.TokenRemoteDataSourceImp
 import com.example.recommendtrack.data.remote.GenreApi
 import dagger.Binds
 import dagger.Module
@@ -17,6 +19,11 @@ abstract class DataSourceModule {
 
     @Singleton
     @Binds
-    abstract fun bindsGithubRemoteDataSource(dataSource: GenreRemoteDataSourceImp): GenreRemoteDataSource
+    abstract fun bindGenreRemoteDataSource(dataSource: GenreRemoteDataSourceImp): GenreRemoteDataSource
+
+
+    @Singleton
+    @Binds
+    abstract fun bindsTokenRemoteDataSource(dataSource: TokenRemoteDataSourceImp): TokenRemoteDataSource
 
 }

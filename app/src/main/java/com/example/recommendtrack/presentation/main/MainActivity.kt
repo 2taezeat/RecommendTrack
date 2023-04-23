@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.ui
+package com.example.recommendtrack.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
