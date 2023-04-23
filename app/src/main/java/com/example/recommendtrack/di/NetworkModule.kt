@@ -8,10 +8,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import javax.inject.Singleton
 
 
@@ -20,14 +23,42 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Singleton
+    @ContentInterceptorOkHttpClient
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideContentOkHttpClient(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }
+
+
+    @Singleton
+    @AuthInterceptorOkHttpClient
+    @Provides
+    fun provideAccountOkHttpClient(): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val interceptor = object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
+                val newRequest = request().newBuilder()
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .build()
+                return proceed(newRequest)
+            }
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(interceptor = interceptor)
+            .build()
+    }
+
+
+
+
 
     @Singleton
     @Provides
