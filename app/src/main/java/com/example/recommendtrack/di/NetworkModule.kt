@@ -15,12 +15,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
 
     @Singleton
     @ContentInterceptorOkHttpClient
@@ -32,7 +34,6 @@ object NetworkModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }
-
 
     @Singleton
     @AuthInterceptorOkHttpClient
@@ -58,11 +59,10 @@ object NetworkModule {
 
 
 
-
-
     @Singleton
+    @ContentRetrofit
     @Provides
-    fun provideBaseUrlRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideBaseUrlRetrofit(@ContentInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
@@ -72,8 +72,9 @@ object NetworkModule {
 
 
     @Singleton
+    @AuthRetrofit
     @Provides
-    fun provideAccountUrlRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideAccountUrlRetrofit(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
@@ -84,13 +85,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGenreApi(retrofit: Retrofit): GenreApi {
+    fun provideGenreApi(@ContentRetrofit retrofit: Retrofit): GenreApi {
         return retrofit.create(GenreApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideTokenApi(retrofit: Retrofit): TokenApi {
+    fun provideTokenApi(@AuthRetrofit retrofit: Retrofit): TokenApi {
         return retrofit.create(TokenApi::class.java)
     }
 
