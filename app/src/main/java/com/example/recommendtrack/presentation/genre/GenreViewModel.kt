@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.usecase.GetAllGenreUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GenreViewModel(private val GetAllGenreUseCase: GetAllGenreUseCase) : ViewModel() {
+@HiltViewModel
+class GenreViewModel @Inject constructor(private val getAllGenreUseCase: GetAllGenreUseCase) : ViewModel() {
 
 
     private val _genres = MutableStateFlow<List<String>>(emptyList())
@@ -17,9 +20,9 @@ class GenreViewModel(private val GetAllGenreUseCase: GetAllGenreUseCase) : ViewM
 
 
     fun getAllGenres() {
-//        viewModelScope.launch {
-//            _genres.value = GetAllGenreUseCase.invoke()
-//        }
+        viewModelScope.launch {
+            //_genres.value = getAllGenreUseCase.invoke()
+        }
     }
 
 

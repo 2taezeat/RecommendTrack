@@ -7,10 +7,12 @@ import androidx.fragment.app.viewModels
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentGenreBinding
 import com.example.recommendtrack.presentation.ui.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
 
-
+@AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
-    private val viewModel by viewModels<GenreViewModel>()
+    private val viewModel : GenreViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +24,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
         super.onViewCreated(view, savedInstanceState)
         Log.d("viewModel_GenreFragment", "${viewModel}")
 
-        viewModel.getAllGenres()
+        //viewModel.getAllGenres()
 
     }
 
