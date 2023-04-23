@@ -4,6 +4,7 @@ import com.example.recommendtrack.data.remote.GenreApi
 import com.example.recommendtrack.data.remote.TokenApi
 import com.example.recommendtrack.utils.Constants.BASE_URL
 import com.example.recommendtrack.utils.Constants.SPOTIFY_ACCOUNT_URL
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -76,6 +77,7 @@ object NetworkModule {
     @Provides
     fun provideAccountUrlRetrofit(@AuthInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .baseUrl(SPOTIFY_ACCOUNT_URL)

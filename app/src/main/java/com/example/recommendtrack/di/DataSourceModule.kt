@@ -13,6 +13,26 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object DataSourceModule {
+//
+//    @Singleton
+//    @Provides
+//    fun providesGenreRemoteDataSource(dataSource: GenreRemoteDataSourceImp): GenreRemoteDataSource {
+//        return dataSource
+//    }
+//
+//
+//    @Singleton
+//    @Provides
+//    fun providesTokenRemoteDataSource(dataSource: TokenRemoteDataSourceImp): TokenRemoteDataSource {
+//        return dataSource
+//
+//    }
+//
+//}
+
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {

@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initBottomNavView()
 
-        //viewModel.getToken()
+        viewModel.getToken()
     }
 
     private fun getNavController(): NavController {
