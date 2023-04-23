@@ -1,16 +1,22 @@
 package com.example.recommendtrack.data.remote
 
-import com.example.recommendtrack.data.dto.GenresDto
-import com.example.recommendtrack.data.dto.RequestToken
 import com.example.recommendtrack.data.dto.TokenDto
-import kotlinx.coroutines.flow.Flow
+import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.*
 
 interface TokenApi {
 
     @POST("api/token")
-    fun getToken(
-        @Body requestToken: RequestToken
-    ): Flow<TokenDto>
+    @FormUrlEncoded
+    suspend fun getToken(
+        @Field("grant_type") grantType: String,
+        @Field("client_id") clientId: String,
+        @Field("client_secret") clientSecret: String
+    ): ApiResponse<TokenDto>
+
+//    @POST("api/token")
+//    suspend fun getToken(
+//        @Body requestToken: RequestToken
+//    ): ApiResponse<TokenDto>
 
 }
