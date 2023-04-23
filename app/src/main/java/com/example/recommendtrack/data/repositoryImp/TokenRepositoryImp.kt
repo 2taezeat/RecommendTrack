@@ -3,6 +3,7 @@ package com.example.recommendtrack.data.repositoryImp
 import com.example.recommendtrack.data.datasource.GenreRemoteDataSource
 import com.example.recommendtrack.data.datasource.TokenRemoteDataSource
 import com.example.recommendtrack.data.dto.GenresDto
+import com.example.recommendtrack.data.dto.RequestToken
 import com.example.recommendtrack.data.dto.TokenDto
 import com.example.recommendtrack.data.mapper.asDomain
 import com.example.recommendtrack.domain.entity.Genre
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 class TokenRepositoryImp
 @Inject constructor(private val dataSource: TokenRemoteDataSource) : TokenRepository {
-    override suspend fun fetchToken(): Flow<Token> {
-        return dataSource.fetchToken().map { tokenDto -> tokenDto.asDomain() }
+    override suspend fun fetchToken(requestToken: RequestToken): Flow<Token> {
+        return dataSource.fetchToken(requestToken).map { tokenDto -> tokenDto.asDomain() }
     }
 }
