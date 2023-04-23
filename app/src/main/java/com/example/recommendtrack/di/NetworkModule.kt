@@ -1,7 +1,9 @@
 package com.example.recommendtrack.di
 
 import com.example.recommendtrack.data.remote.GenreApi
+import com.example.recommendtrack.data.remote.TokenApi
 import com.example.recommendtrack.utils.Constants.BASE_URL
+import com.example.recommendtrack.utils.Constants.SPOTIFY_ACCOUNT_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +31,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideBaseUrlRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
@@ -37,11 +39,31 @@ object NetworkModule {
             .build()
     }
 
+
+    @Singleton
+    @Provides
+    fun provideAccountUrlRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .baseUrl(SPOTIFY_ACCOUNT_URL)
+            .build()
+    }
+
+
     @Singleton
     @Provides
     fun provideGenreApi(retrofit: Retrofit): GenreApi {
         return retrofit.create(GenreApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideTokenApi(retrofit: Retrofit): TokenApi {
+        return retrofit.create(TokenApi::class.java)
+    }
+
+
 
 
 }
