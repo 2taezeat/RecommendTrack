@@ -7,39 +7,32 @@ import com.example.recommendtrack.data.mapper.TokenMapper
 import com.example.recommendtrack.domain.entity.Token
 import com.example.recommendtrack.domain.repository.TokenRepository
 import com.skydoves.sandwich.*
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class TokenRepositoryImp @Inject constructor(private val dataSource: TokenRemoteDataSource) :
-    TokenRepository {
-    override suspend fun fetchToken(
-        grantType: String,
-        clientId: String,
-        clientSecret: String
-    ): Flow<Token> {
+class TokenRepositoryImp @Inject constructor(
+    private val dataSource: TokenRemoteDataSource,
+    private val ioDispatcher: CoroutineDispatcher
+) : TokenRepository {
+    override suspend fun fetchToken(grantType: String, clientId: String, clientSecret: String): Flow<Token> {
+        val response = dataSource.fetchToken(grantType, clientId, clientSecret)
 
-        //val response = dataSource.fetchToken(grantType, clientId, clientSecret)
-        //Log.d("TokenRepositoryImp", "${response}")
-
-
-
-        return flow {
-            val response = dataSource.fetchToken(grantType, clientId, clientSecret)
+        val flowToken = flow {
             response.suspendOnSuccess(TokenMapper) {
                 val token = this
-                Log.d("TokenRepositoryImp", "$token")
-
+                Log.d("success", "$token")
                 emit(token)
             }.suspendOnFailure {
-                Log.d("TokenRepositoryImp", "${this.message()}")
-
+                Log.d("fail", "${this.message()}")
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
-                Log.d("TokenRepositoryImp", "$errorMessage")
+                Log.d("error", "$errorMessage")
             }
 
-
-        }
+        }.flowOn(ioDispatcher)
+        return flowToken
     }
 }
