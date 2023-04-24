@@ -19,8 +19,8 @@ import javax.inject.Inject
 class GenreRepositoryImp
 @Inject constructor(private val dataSource: GenreRemoteDataSource, private val ioDispatcher: CoroutineDispatcher) : GenreRepository {
 
-    override suspend fun fetchGenres(): Flow<List<Genre>> {
-        val response = dataSource.fetchGenres()
+    override suspend fun fetchGenres(accessToken: String): Flow<List<Genre>> {
+        val response = dataSource.fetchGenres(accessToken)
 
         val flowGenres = flow {
             response.suspendOnSuccess(GenreMapper) {

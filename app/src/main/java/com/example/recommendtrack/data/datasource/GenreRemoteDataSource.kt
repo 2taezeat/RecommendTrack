@@ -5,5 +5,5 @@ import com.skydoves.sandwich.ApiResponse
 import kotlinx.coroutines.flow.Flow
 
 interface GenreRemoteDataSource {
-    suspend fun fetchGenres(): ApiResponse<GenresDto>
+    suspend fun fetchGenres(accessToken: String): ApiResponse<GenresDto>
 }

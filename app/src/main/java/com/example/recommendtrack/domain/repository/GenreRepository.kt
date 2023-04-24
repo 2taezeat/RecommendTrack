@@ -4,5 +4,5 @@ import com.example.recommendtrack.domain.entity.Genre
 import kotlinx.coroutines.flow.Flow
 
 interface GenreRepository {
-    suspend fun fetchGenres(): Flow<List<Genre>>
+    suspend fun fetchGenres(accessToken: String): Flow<List<Genre>>
 }

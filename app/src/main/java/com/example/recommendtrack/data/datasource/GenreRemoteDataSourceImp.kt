@@ -12,8 +12,8 @@ import javax.inject.Singleton
 class GenreRemoteDataSourceImp @Inject constructor(private val genreApi: GenreApi) :
     GenreRemoteDataSource {
 
-    override suspend fun fetchGenres(): ApiResponse<GenresDto> {
-        return genreApi.getGenres()
+    override suspend fun fetchGenres(accessToken: String): ApiResponse<GenresDto> {
+        return genreApi.getGenres(accessToken)
     }
 
 
