@@ -25,11 +25,13 @@ class MainViewModel @Inject constructor(
     private val tokenPreferenceKey = stringPreferencesKey(ACCESS_TOKEN)
 
     init {
-        checkToken()
+        accessToken()
     }
 
 
-    private fun checkToken() {
+    private fun checkToken() :Boolean {
+        var tokenString = ""
+
         val tokenFlow =
             dataStore.data.map { preferences ->
                 preferences[tokenPreferenceKey] ?: ""
@@ -37,14 +39,21 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch {
             tokenFlow.collect { it ->
-                Log.d("collect", "$it")
-
+                tokenString = it
             }
         }
+
+        return tokenString.isNotEmpty()
     }
 
 
-    fun getToken() {
+    fun accessToken() {
+        if (!checkToken()) {
+            getToken()
+        }
+    }
+
+    private fun getToken() {
         viewModelScope.launch {
             getTokenUseCase.invoke(
                 grantType = Constants.SPOTIFY_GRANT_TYPE,
