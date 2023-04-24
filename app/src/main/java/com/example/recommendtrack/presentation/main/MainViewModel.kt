@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun accessToken() {
+    private fun accessToken() {
         if (!checkToken()) {
             getToken()
         }
