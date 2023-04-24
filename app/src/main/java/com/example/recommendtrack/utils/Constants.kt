@@ -8,6 +8,12 @@ object Constants {
     const val SPOTIFY_CLIENT_ID = "d96b62afa0764ddf961a7c10d1e81d56"
     const val SPOTIFY_CLIENT_SECRET = "a875841f6bd2447eb1b41688cce77a73"
 
+    const val ACCESS_TOKEN = "access_token"
+
+
+
+
+
 
 
 }
