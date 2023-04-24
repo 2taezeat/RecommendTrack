@@ -24,7 +24,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
         super.onViewCreated(view, savedInstanceState)
         Log.d("viewModel_GenreFragment", "${viewModel}")
 
-        //viewModel.getAllGenres()
+        viewModel.getAllGenres()
 
     }
 

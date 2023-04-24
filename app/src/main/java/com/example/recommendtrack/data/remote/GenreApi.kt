@@ -9,7 +9,7 @@ import retrofit2.http.Header
 interface GenreApi {
 
     @GET("recommendations/available-genre-seeds")
-    fun getGenres(
+    suspend fun getGenres(
         @Header("Authorization") accessToken: String
     ): ApiResponse<GenresDto>
 
