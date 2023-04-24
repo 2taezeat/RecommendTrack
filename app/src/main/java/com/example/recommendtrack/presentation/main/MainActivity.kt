@@ -1,6 +1,7 @@
 package com.example.recommendtrack.presentation.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initBottomNavView()
+        Log.d("viewModel_MainActivity_onCreate", "${viewModel}")
+
+
+
     }
 
     private fun getNavController(): NavController {
