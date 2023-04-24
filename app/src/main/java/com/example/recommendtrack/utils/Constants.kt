@@ -10,11 +10,5 @@ object Constants {
 
     const val ACCESS_TOKEN = "access_token"
 
-
-
-
-
-
-
 }
 
