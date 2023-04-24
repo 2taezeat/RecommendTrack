@@ -65,6 +65,7 @@ object NetworkModule {
     @Provides
     fun provideBaseUrlRetrofit(@ContentInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .baseUrl(BASE_URL)
