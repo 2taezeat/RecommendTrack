@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/fragment_genre.xml" value="0.19519927536231885" />
         <entry key="app/src/main/res/layout/fragment_my_artist.xml" value="0.22192028985507245" />
         <entry key="app/src/main/res/layout/fragment_recommend_track.xml" value="0.22192028985507245" />
+        <entry key="app/src/main/res/layout/list_item_genre.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/menu/main_bottom_nav_view.xml" value="0.478515625" />
       </map>
     </option>
