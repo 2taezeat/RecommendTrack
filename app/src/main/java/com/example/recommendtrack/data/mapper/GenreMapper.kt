@@ -12,7 +12,7 @@ import com.skydoves.sandwich.ApiSuccessModelMapper
 
 object GenreMapper : ApiSuccessModelMapper<GenresDto, List<Genre>> {
     override fun map(apiSuccessResponse: ApiResponse.Success<GenresDto>): List<Genre> {
-        return apiSuccessResponse.data.genres.toList().map { Genre(it) }
+        return apiSuccessResponse.data.genres.map { Genre( name = it)  }
     }
 
 }
