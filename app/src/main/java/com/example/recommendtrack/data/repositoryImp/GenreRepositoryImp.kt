@@ -25,16 +25,16 @@ class GenreRepositoryImp
         val flowGenres = flow {
             response.suspendOnSuccess(GenreMapper) {
                 val genres = this
-                Log.d("success", "$genres")
                 emit(genres)
+                Log.d("success", "$genres")
             }.suspendOnFailure {
                 Log.d("fail", "${this.message()}")
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Log.d("error", "$errorMessage")
             }
-
         }.flowOn(ioDispatcher)
+
         return flowGenres
     }
 }

@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentGenreBinding
+import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.presentation.ui.BaseFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -30,7 +32,10 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
         Log.d("viewModel_GenreFragment", "${viewModel}")
         genreChipGroup = binding.genreChipGroup
 
-        initGenreChipView()
+        viewModel.genres.observe(viewLifecycleOwner, Observer {
+            initGenreChipView(it)
+        })
+
 
 
 
@@ -46,11 +51,13 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             }
     }
 
-    private fun initGenreChipView() {
-        val chip = Chip(this.context)
-        chip.text = "sample_test"
+    private fun initGenreChipView(genres: List<Genre>) {
+        genres.forEach {
+            val chip = Chip(this.context)
+            chip.text = it.name
+            genreChipGroup.addView(chip)
+        }
 
-        genreChipGroup.addView(chip)
     }
 
 

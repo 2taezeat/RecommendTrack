@@ -40,7 +40,7 @@ class MainViewModel @Inject constructor(
     private fun getToken() {
         viewModelScope.launch {
             val tokenString = tokenFlowFromDataStore().first()
-            if (!tokenString.isNotEmpty()) {
+            if (tokenString.isEmpty()) {
                 val tokenRemoteFlow = getTokenUseCase.invoke(
                     SPOTIFY_GRANT_TYPE,
                     SPOTIFY_CLIENT_ID,

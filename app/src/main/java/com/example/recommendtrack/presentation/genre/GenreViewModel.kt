@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.*
+import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.domain.usecase.GetAllGenreUseCase
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +20,8 @@ class GenreViewModel @Inject constructor(private val getAllGenreUseCase: GetAllG
 
     }
 
-    private val _genres = MutableStateFlow<List<String>>(emptyList())
-    val genres = _genres.asStateFlow()
+    private val _genres = MutableLiveData<List<Genre>>()
+    val genres : LiveData<List<Genre>> = _genres
 
 
     private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
@@ -30,11 +31,12 @@ class GenreViewModel @Inject constructor(private val getAllGenreUseCase: GetAllG
 
 
     fun getAllGenres() {
-        Log.d("getAllGenres", "init")
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            val genresLiveData = getAllGenreUseCase.invoke(accessToken).asLiveData()
-            Log.d("getAllGenres", "${genresLiveData}")
+            getAllGenreUseCase.invoke(accessToken).collect { it ->
+                _genres.value = it
+            }
+
         }
     }
 
