@@ -30,6 +30,7 @@ class GenreViewModel @Inject constructor(private val getAllGenreUseCase: GetAllG
 
 
     fun getAllGenres() {
+        Log.d("getAllGenres", "init")
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
             val genresLiveData = getAllGenreUseCase.invoke(accessToken).asLiveData()
