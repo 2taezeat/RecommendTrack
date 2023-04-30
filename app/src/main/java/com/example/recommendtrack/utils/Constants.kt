@@ -10,5 +10,7 @@ object Constants {
 
     const val ACCESS_TOKEN = "access_token"
 
+    const val GENRE_DATABASE_NAME = "genre-database"
+
 }
 

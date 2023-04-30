@@ -19,3 +19,8 @@ annotation class AuthRetrofit
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ContentRetrofit
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class GenreDatabaseQualifier
