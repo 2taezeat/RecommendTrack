@@ -54,7 +54,14 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
     private fun initGenreChipView(genres: List<Genre>) {
         genres.forEach {
             val chip = Chip(this.context)
-            chip.text = it.name
+            //chip.text = it.name
+
+            chip.apply {
+                text = it.name
+                isCheckable = true
+            }
+
+
             genreChipGroup.addView(chip)
         }
 
