@@ -1,9 +1,6 @@
 package com.example.recommendtrack.data.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.recommendtrack.domain.entity.Genre
 import kotlinx.coroutines.flow.Flow
 
@@ -16,8 +13,8 @@ interface GenreDao {
     @Update
     fun updateMyGenre(genre: Genre)
 
-    @Insert
-    fun addMyGenres(genres: List<Genre>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addMyGenres(genres: List<Genre>)
 
 
 }

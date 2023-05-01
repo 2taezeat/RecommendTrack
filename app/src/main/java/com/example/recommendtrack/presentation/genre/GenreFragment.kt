@@ -1,8 +1,8 @@
 package com.example.recommendtrack.presentation.ui.artist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
@@ -12,33 +12,38 @@ import com.example.recommendtrack.presentation.ui.BaseFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
+import timber.log.Timber
 
 @AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
     private val viewModel : GenreViewModel by viewModels()
     private lateinit var genreChipGroup: ChipGroup
+    private lateinit var myGenres : MutableList<Genre>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getMyGenres()
         viewModel.getAllGenres()
-
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("viewModel_GenreFragment", "${viewModel}")
+
         genreChipGroup = binding.genreChipGroup
+        //myGenres = mutableListOf()
+        viewModel.myGenres.observe(viewLifecycleOwner, Observer {
+            myGenres = it.toMutableList()
+            Timber.d("${myGenres}")
+
+        })
 
         viewModel.genres.observe(viewLifecycleOwner, Observer {
             initGenreChipView(it)
         })
 
-
-
-
+        initGenreSaveView()
 
     }
 
@@ -51,16 +56,39 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             }
     }
 
-    private fun initGenreChipView(genres: List<Genre>) {
-        genres.forEach {
-            val chip = Chip(this.context)
-            //chip.text = it.name
+    private fun initGenreSaveView() {
+        binding.genreSaveButton.setOnClickListener {
+            val distinctMyGenres = myGenres.distinct()
+            Timber.d( "${myGenres}")
 
-            chip.apply {
-                text = it.name
-                isCheckable = true
+            if (distinctMyGenres.size <= 5) {
+                viewModel.saveMyGenres(distinctMyGenres)
+            } else {
+                Toast.makeText(this.context, R.string.genre_save_fail_toast_message, Toast.LENGTH_LONG).show()
             }
+        }
 
+    }
+
+
+    private fun initGenreChipView(genres: List<Genre>) {
+        genres.forEach { genre ->
+            val chip = Chip(this.context)
+            chip.apply {
+                text = genre.name
+                isCheckable = true
+                setOnCheckedChangeListener { compoundButton, isChecked ->
+                    if (isChecked) {
+                        myGenres.add(Genre(name = genre.name, true))
+                    } else {
+                        myGenres.remove(Genre(name = genre.name, false))
+                    }
+                }
+                if (myGenres.any { it.name == genre.name }) {
+                    Timber.d( "${genre}")
+                    isChecked = true
+                }
+            }
 
             genreChipGroup.addView(chip)
         }
