@@ -13,6 +13,8 @@
 
     <string name="genre_save">Save My Genre</string>
 
+    <string name="genre_save_fail_toast_message">Please Select up to 5 genres.</string>
+
 <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 
 
