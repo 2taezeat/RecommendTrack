@@ -43,4 +43,8 @@ class GenreRepositoryImp
     override suspend fun addMyGenres(myGenres : List<Genre>) {
         genreDao.addMyGenres(myGenres)
     }
+
+    override suspend fun fetchMyGenres(): Flow<List<Genre>> {
+        return genreDao.getMyGenres().flowOn(ioDispatcher)
+    }
 }
