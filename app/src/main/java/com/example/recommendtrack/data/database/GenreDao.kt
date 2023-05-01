@@ -17,7 +17,7 @@ interface GenreDao {
     fun updateMyGenre(genre: Genre)
 
     @Insert
-    fun addMyGenre(genre: Genre)
+    fun addMyGenres(genres: List<Genre>)
 
 
 }
