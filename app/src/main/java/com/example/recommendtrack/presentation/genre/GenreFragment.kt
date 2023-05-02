@@ -19,6 +19,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
     private val viewModel : GenreViewModel by viewModels()
     private lateinit var genreChipGroup: ChipGroup
     private lateinit var myGenres : MutableList<Genre>
+    private lateinit var deleteGenres : MutableList<Genre>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         genreChipGroup = binding.genreChipGroup
-        myGenres = mutableListOf()
+        initProperty()
         viewModel.myGenres.observe(viewLifecycleOwner, Observer {
             myGenres = it.toMutableList()
         })
@@ -43,6 +44,11 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     }
 
+    private fun initProperty() {
+        myGenres = mutableListOf()
+        deleteGenres = mutableListOf()
+    }
+
     override fun onStop() {
         super.onStop()
         viewModel.getMyGenres()
@@ -53,12 +59,15 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
     private fun initGenreSaveView() {
         binding.genreSaveButton.setOnClickListener {
             val distinctMyGenres = myGenres.distinct()
-            Timber.d( "${distinctMyGenres}")
+            val distinctDeleteGenres = deleteGenres.distinct()
 
             if (distinctMyGenres.size <= 5) {
-                viewModel.saveMyGenres(distinctMyGenres)
+                viewModel.addMyGenres(distinctMyGenres)
+                viewModel.deleteMyGenres(distinctDeleteGenres)
             } else {
                 Toast.makeText(this.context, R.string.genre_save_fail_toast_message, Toast.LENGTH_LONG).show()
+
+                viewModel.deleteMyGenres(distinctDeleteGenres)
             }
         }
 
@@ -78,9 +87,11 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
                 setOnCheckedChangeListener { compoundButton, isChecked ->
                     if (isChecked) {
                         myGenres.add(Genre(name = genre.name, true))
+                        deleteGenres.remove(Genre(name = genre.name, true))
+
                     } else {
-                        Timber.d( "${genre.name}")
                         myGenres.remove(Genre(name = genre.name, true))
+                        deleteGenres.add(Genre(name = genre.name, true))
                     }
                 }
 

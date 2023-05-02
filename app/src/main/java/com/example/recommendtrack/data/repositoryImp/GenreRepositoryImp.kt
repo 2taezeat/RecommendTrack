@@ -49,11 +49,8 @@ class GenreRepositoryImp
         return genreDao.getMyGenres().flowOn(ioDispatcher)
     }
 
-    override suspend fun deleteMyGenres(myGenres : List<Genre>) {
-        genreDao.deleteMyGenres(myGenres)
+    override suspend fun deleteMyGenres(deletingGenres : List<Genre>) {
+        genreDao.deleteMyGenres(deletingGenres)
     }
 
-    override suspend fun updateMyGenres(myGenres: List<Genre>) {
-        genreDao.updateMyGenre(myGenres)
-    }
 }

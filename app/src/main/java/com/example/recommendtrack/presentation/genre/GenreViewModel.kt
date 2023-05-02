@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.*
 import com.example.recommendtrack.domain.entity.Genre
-import com.example.recommendtrack.domain.usecase.UpdateMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.GetMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.AddMyGenresUseCase
@@ -20,7 +20,7 @@ class GenreViewModel @Inject constructor(
     private val getAllGenreUseCase: GetAllGenreUseCase,
     private val addMyGenresUseCase: AddMyGenresUseCase,
     private val getMyGenresUseCase: GetMyGenresUseCase,
-    private val deleteMyGenresUseCase: UpdateMyGenresUseCase,
+    private val deleteMyGenresUseCase: DeleteMyGenresUseCase,
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
@@ -65,8 +65,9 @@ class GenreViewModel @Inject constructor(
         }
     }
 
-    fun updateMyGenres(myGenres: List<Genre>) {
+    fun deleteMyGenres(deletingGenres: List<Genre>) {
         viewModelScope.launch {
+            deleteMyGenresUseCase.invoke(deletingGenres)
 
         }
     }

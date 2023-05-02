@@ -36,7 +36,7 @@ object UseCaseModule {
 
 
     @Provides
-    fun provideUpdateMyGenresUseCase(repository: GenreRepository): UpdateMyGenresUseCase {
-        return UpdateMyGenresUseCase(repository)
+    fun provideDeleteMyGenresUseCase(repository: GenreRepository): DeleteMyGenresUseCase {
+        return DeleteMyGenresUseCase(repository)
     }
 }
