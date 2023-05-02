@@ -28,12 +28,12 @@ class GenreRepositoryImp
             response.suspendOnSuccess(GenreMapper) {
                 val genres = this
                 emit(genres)
-                Log.d("success", "$genres")
+                Timber.tag("success").d( "$genres")
             }.suspendOnFailure {
-                Log.d("fail", "${this.message()}")
+                Timber.tag("fail").d( "${this.message()}")
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
-                Log.d("error", "$errorMessage")
+                Timber.tag("error").d("$errorMessage")
             }
         }.flowOn(ioDispatcher)
 

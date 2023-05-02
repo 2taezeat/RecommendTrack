@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 class TokenRepositoryImp @Inject constructor(
@@ -23,13 +24,13 @@ class TokenRepositoryImp @Inject constructor(
         val flowToken = flow {
             response.suspendOnSuccess(TokenMapper) {
                 val token = this
-                Log.d("success", "$token")
+                Timber.tag("success").d( "$token")
                 emit(token)
             }.suspendOnFailure {
-                Log.d("fail", "${this.message()}")
+                Timber.tag("fail").d( "${this.message()}")
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
-                Log.d("error", "$errorMessage")
+                Timber.tag("error").d( "$errorMessage")
             }
 
         }.flowOn(ioDispatcher)

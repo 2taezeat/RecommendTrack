@@ -8,6 +8,7 @@ import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.ui.BaseFragment
 import com.example.recommendtrack.presentation.ui.artist.ArtistViewModel
+import timber.log.Timber
 
 
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
@@ -21,7 +22,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("viewModel_ArtistFragment", "${viewModel}")
+        Timber.d("${viewModel}")
     }
 
 

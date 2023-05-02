@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initBottomNavView()
-        Log.d("viewModel_MainActivity_onCreate", "${viewModel}")
+        Timber.d("${viewModel}")
 
 
 

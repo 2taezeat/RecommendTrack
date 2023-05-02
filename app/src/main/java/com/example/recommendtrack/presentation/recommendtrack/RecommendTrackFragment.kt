@@ -9,6 +9,7 @@ import com.example.recommendtrack.databinding.FragmentRecommendTrackBinding
 import com.example.recommendtrack.presentation.ui.BaseFragment
 import com.example.recommendtrack.presentation.ui.artist.ArtistViewModel
 import com.example.recommendtrack.presentation.ui.recommendtrack.RecommendTrackViewModel
+import timber.log.Timber
 
 
 class RecommendTrackFragment : BaseFragment<FragmentRecommendTrackBinding>(R.layout.fragment_recommend_track) {
@@ -22,7 +23,7 @@ class RecommendTrackFragment : BaseFragment<FragmentRecommendTrackBinding>(R.lay
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("viewModel_RecommendTrackFragment", "${viewModel}")
+        Timber.d("${viewModel}")
     }
 
 
