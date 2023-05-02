@@ -4,7 +4,7 @@ import com.example.recommendtrack.domain.repository.ArtistRepository
 import com.example.recommendtrack.domain.repository.GenreRepository
 import com.example.recommendtrack.domain.repository.TokenRepository
 import com.example.recommendtrack.domain.usecase.*
-import com.example.recommendtrack.domain.usecase.artist.GetArtistUseCase
+import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
 import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
@@ -48,8 +48,8 @@ object UseCaseModule {
 
 
     @Provides
-    fun provideGetArtistUseCase(repository: ArtistRepository): GetArtistUseCase {
-        return GetArtistUseCase(repository)
+    fun provideSearchArtistUseCase(repository: ArtistRepository): SearchArtistUseCase {
+        return SearchArtistUseCase(repository)
     }
 
 

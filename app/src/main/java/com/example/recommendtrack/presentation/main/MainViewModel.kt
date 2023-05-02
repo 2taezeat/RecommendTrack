@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.usecase.GetTokenUseCase
-import com.example.recommendtrack.domain.usecase.artist.GetArtistUseCase
 import com.example.recommendtrack.utils.Constants.SPOTIFY_CLIENT_ID
 import com.example.recommendtrack.utils.Constants.SPOTIFY_CLIENT_SECRET
 import com.example.recommendtrack.utils.Constants.SPOTIFY_GRANT_TYPE
@@ -14,7 +13,6 @@ import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Artist
-import com.example.recommendtrack.domain.usecase.artist.GetArtistUseCase
+import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
 import com.example.recommendtrack.utils.PreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtistViewModel @Inject constructor(
-    private val getArtistUseCase: GetArtistUseCase,
+    private val searchArtistUseCase: SearchArtistUseCase,
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
@@ -38,7 +38,7 @@ class ArtistViewModel @Inject constructor(
     fun searchArtist(artistName: String) {
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            getArtistUseCase.invoke(accessToken, "artist:${artistName}").collect { it ->
+            searchArtistUseCase.invoke(accessToken, "artist:${artistName}").collect { it ->
                 _searchArtist.value = it
             }
         }
