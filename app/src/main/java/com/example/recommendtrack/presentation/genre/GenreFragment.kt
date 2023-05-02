@@ -64,9 +64,10 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             if (distinctMyGenres.size <= 5) {
                 viewModel.addMyGenres(distinctMyGenres)
                 viewModel.deleteMyGenres(distinctDeleteGenres)
-            } else {
-                Toast.makeText(this.context, R.string.genre_save_fail_toast_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, R.string.genre_add_delete_both_success_toast_message, Toast.LENGTH_LONG).show()
 
+            } else {
+                Toast.makeText(this.context, R.string.genre_delete_only_success_toast_message, Toast.LENGTH_LONG).show()
                 viewModel.deleteMyGenres(distinctDeleteGenres)
             }
         }
@@ -79,27 +80,28 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             val chip = Chip(this.context)
             chip.apply {
                 text = genre.name
-                isCheckable = true
-                if (myGenres.any { it.name == genre.name }) {
-                    Timber.d( "${genre}")
-                    isChecked = true
-                }
-                setOnCheckedChangeListener { compoundButton, isChecked ->
-                    if (isChecked) {
-                        myGenres.add(Genre(name = genre.name))
-                        deleteGenres.remove(Genre(name = genre.name))
-
-                    } else {
-                        myGenres.remove(Genre(name = genre.name))
-                        deleteGenres.add(Genre(name = genre.name))
-                    }
-                }
-
+                setChipCheckedChange(genre)
             }
 
             genreChipGroup.addView(chip)
         }
 
+    }
+
+    private fun Chip.setChipCheckedChange(genre: Genre) {
+        isCheckable = true
+        if (myGenres.any { it.name == genre.name }) {
+            isChecked = true
+        }
+        setOnCheckedChangeListener { compoundButton, isChecked ->
+            if (isChecked) {
+                myGenres.add(Genre(name = genre.name))
+                deleteGenres.remove(Genre(name = genre.name))
+            } else {
+                myGenres.remove(Genre(name = genre.name))
+                deleteGenres.add(Genre(name = genre.name))
+            }
+        }
     }
 
 
