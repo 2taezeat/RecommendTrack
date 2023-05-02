@@ -48,7 +48,6 @@ class GenreViewModel @Inject constructor(
             getAllGenreUseCase.invoke(accessToken).collect { it ->
                 _genres.value = it
             }
-
         }
     }
 
@@ -59,18 +58,20 @@ class GenreViewModel @Inject constructor(
         }
     }
 
+    fun deleteMyGenres(deletingGenres: List<Genre>) {
+        viewModelScope.launch {
+            deleteMyGenresUseCase.invoke(deletingGenres)
+        }
+    }
+
+
     fun getMyGenres() {
         viewModelScope.launch {
             _myGenres.value = getMyGenresUseCase.invoke().first()
         }
     }
 
-    fun deleteMyGenres(deletingGenres: List<Genre>) {
-        viewModelScope.launch {
-            deleteMyGenresUseCase.invoke(deletingGenres)
 
-        }
-    }
 
     override fun onCleared() {
         Timber.d("onCleared_genreViewModel")

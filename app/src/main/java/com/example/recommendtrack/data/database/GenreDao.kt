@@ -7,15 +7,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GenreDao {
 
-    @Query("SELECT * FROM genre WHERE isSelected = true")
+    @Query("SELECT * FROM genre")
     fun getMyGenres(): Flow<List<Genre>>
-
-
-    @Transaction
-    open suspend fun updateMyGenre(genres: List<Genre>) {
-        addMyGenres(genres)
-        deleteMyGenres(genres)
-    }
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

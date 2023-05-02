@@ -5,7 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Genre(
-    @PrimaryKey val name: String,
-    var isSelected: Boolean = false
-
+    @PrimaryKey val name: String
 )

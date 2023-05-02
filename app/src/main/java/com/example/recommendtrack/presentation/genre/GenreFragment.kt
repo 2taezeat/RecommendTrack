@@ -86,12 +86,12 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
                 }
                 setOnCheckedChangeListener { compoundButton, isChecked ->
                     if (isChecked) {
-                        myGenres.add(Genre(name = genre.name, true))
-                        deleteGenres.remove(Genre(name = genre.name, true))
+                        myGenres.add(Genre(name = genre.name))
+                        deleteGenres.remove(Genre(name = genre.name))
 
                     } else {
-                        myGenres.remove(Genre(name = genre.name, true))
-                        deleteGenres.add(Genre(name = genre.name, true))
+                        myGenres.remove(Genre(name = genre.name))
+                        deleteGenres.add(Genre(name = genre.name))
                     }
                 }
 
