@@ -4,10 +4,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.*
 import com.example.recommendtrack.domain.entity.Genre
-import com.example.recommendtrack.domain.usecase.DeleteMyGenresUseCase
-import com.example.recommendtrack.domain.usecase.GetAllGenreUseCase
-import com.example.recommendtrack.domain.usecase.GetMyGenresUseCase
-import com.example.recommendtrack.domain.usecase.AddMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
+import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

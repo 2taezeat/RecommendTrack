@@ -3,6 +3,10 @@ package com.example.recommendtrack.di
 import com.example.recommendtrack.domain.repository.GenreRepository
 import com.example.recommendtrack.domain.repository.TokenRepository
 import com.example.recommendtrack.domain.usecase.*
+import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
+import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +18,7 @@ import dagger.hilt.android.components.ViewModelComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetAllGenreUseCase(repository: GenreRepository): GetAllGenreUseCase  {
+    fun provideGetAllGenreUseCase(repository: GenreRepository): GetAllGenreUseCase {
         return GetAllGenreUseCase(repository)
     }
 
@@ -24,13 +28,13 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideAddMyGenresUseCase(repository: GenreRepository): AddMyGenresUseCase  {
+    fun provideAddMyGenresUseCase(repository: GenreRepository): AddMyGenresUseCase {
         return AddMyGenresUseCase(repository)
     }
 
 
     @Provides
-    fun provideGetMyGenresUseCase(repository: GenreRepository): GetMyGenresUseCase  {
+    fun provideGetMyGenresUseCase(repository: GenreRepository): GetMyGenresUseCase {
         return GetMyGenresUseCase(repository)
     }
 

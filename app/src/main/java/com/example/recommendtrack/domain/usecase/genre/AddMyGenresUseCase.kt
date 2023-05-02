@@ -1,4 +1,4 @@
-package com.example.recommendtrack.domain.usecase
+package com.example.recommendtrack.domain.usecase.genre
 
 import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.domain.repository.GenreRepository
