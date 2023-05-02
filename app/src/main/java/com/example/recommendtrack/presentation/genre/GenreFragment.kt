@@ -64,10 +64,11 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             if (distinctMyGenres.size <= 5) {
                 viewModel.addMyGenres(distinctMyGenres)
                 viewModel.deleteMyGenres(distinctDeleteGenres)
-                Toast.makeText(this.context, R.string.genre_add_delete_both_success_toast_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, R.string.genre_add_delete_both_success_toast, Toast.LENGTH_LONG).show()
 
             } else {
-                Toast.makeText(this.context, R.string.genre_delete_only_success_toast_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, R.string.genre_add_only_five_genre_toast, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, R.string.genre_delete_only_success_toast, Toast.LENGTH_LONG).show()
                 viewModel.deleteMyGenres(distinctDeleteGenres)
             }
         }

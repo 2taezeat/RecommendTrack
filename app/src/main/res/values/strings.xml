@@ -13,8 +13,9 @@
 
     <string name="genre_save">Save My Genre</string>
 
-    <string name="genre_delete_only_success_toast_message">You can choose up to 5 genres! So, Only deletion is reflected in the genre selection</string>
-    <string name="genre_add_delete_both_success_toast_message">Delete and add in the genre selection will be reflected</string>
+    <string name="genre_add_only_five_genre_toast">You can choose up to 5 genres!</string>
+    <string name="genre_delete_only_success_toast">So, Only deletion is reflected in the genre selection</string>
+    <string name="genre_add_delete_both_success_toast">Delete and add in the genre selection will be reflected</string>
 
 <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 
