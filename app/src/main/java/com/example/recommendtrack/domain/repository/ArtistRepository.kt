@@ -7,4 +7,11 @@ import kotlinx.coroutines.flow.Flow
 interface ArtistRepository {
     suspend fun fetchArtist(accessToken: String, artistName: String): Flow<Artist>
 
+
+    suspend fun fetchMyArtist(): Flow<List<Artist>>
+
+    suspend fun addMyArtist(myArtist : Artist)
+
+    suspend fun deleteMyArtist(deletingArtist : Artist)
+
 }

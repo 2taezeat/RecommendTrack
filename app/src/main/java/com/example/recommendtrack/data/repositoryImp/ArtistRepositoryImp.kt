@@ -1,5 +1,6 @@
 package com.example.recommendtrack.data.repositoryImp
 
+import com.example.recommendtrack.data.database.ArtistDao
 import com.example.recommendtrack.data.datasource.ArtistRemoteDataSource
 import com.example.recommendtrack.data.mapper.ArtistMapper
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
@@ -17,7 +18,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ArtistRepositoryImp
-@Inject constructor(private val dataSource: ArtistRemoteDataSource, private val ioDispatcher: CoroutineDispatcher) : ArtistRepository {
+@Inject constructor(private val dataSource: ArtistRemoteDataSource, private val ioDispatcher: CoroutineDispatcher, private val artistDao: ArtistDao) : ArtistRepository {
 
     override suspend fun fetchArtist(accessToken: String, artistName: String): Flow<Artist> {
         val response = dataSource.fetchArtist(accessToken, artistName)
@@ -39,5 +40,15 @@ class ArtistRepositoryImp
         return flowArtist
     }
 
+    override suspend fun fetchMyArtist(): Flow<List<Artist>> {
+        return artistDao.getMyArtist().flowOn(ioDispatcher)
+    }
 
+    override suspend fun addMyArtist(myArtist: Artist) {
+        artistDao.addMyArtist(myArtist)
+    }
+
+    override suspend fun deleteMyArtist(deletingArtist: Artist) {
+        artistDao.deleteMyArtist(deletingArtist)
+    }
 }
