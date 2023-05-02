@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Artist
+import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.domain.usecase.artist.AddMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.DeleteMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.GetMyArtistUseCase
@@ -33,6 +34,9 @@ class ArtistViewModel @Inject constructor(
     private val _searchArtist = MutableLiveData<Artist>()
     val searchArtist: LiveData<Artist> = _searchArtist
 
+    private val _myArtists = MutableLiveData<List<Genre>>()
+    val myArtists: LiveData<List<Genre>> = _myArtists
+
     init {
 
     }
@@ -49,6 +53,29 @@ class ArtistViewModel @Inject constructor(
             }
         }
     }
+
+
+    fun addMyArtist(myArtist: Artist) {
+        viewModelScope.launch {
+            addMyArtistUseCase.invoke(myArtist)
+        }
+    }
+
+    fun deleteMyArtist(deleteArtist: Artist) {
+        viewModelScope.launch {
+            deleteMyArtistUseCase.invoke(deleteArtist)
+        }
+    }
+
+
+    fun getMyArtist() {
+        viewModelScope.launch {
+
+        }
+    }
+
+
+
 
     override fun onCleared() {
         Timber.d("onCleared_genreViewModel")
