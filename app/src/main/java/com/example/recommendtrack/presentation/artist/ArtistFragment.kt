@@ -2,6 +2,7 @@ package com.example.recommendtrack.presentation.artist
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -20,6 +21,8 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var artistFollowersTextView: TextView
     private lateinit var artistPopularityTextView: TextView
     private lateinit var artistGenresTextView: TextView
+    private lateinit var addMyArtistButton: Button
+    private lateinit var deleteMyArtistButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +47,26 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     private fun initView() {
         initSearchView()
+        initButtonView()
         initContentTextView()
+    }
+
+    private fun initButtonView() {
+        addMyArtistButton = binding.artistAddButton
+        deleteMyArtistButton = binding.artistDeleteButton
+
+        addMyArtistButton.setOnClickListener {
+            viewModel.searchArtist.value?.let {
+                viewModel.addMyArtist(it)
+            }
+        }
+
+        deleteMyArtistButton.setOnClickListener {
+            viewModel.searchArtist.value?.let {
+                viewModel.deleteMyArtist(it)
+            }
+        }
+
     }
 
     private fun initContentTextView() {

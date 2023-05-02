@@ -38,7 +38,7 @@ class ArtistViewModel @Inject constructor(
     val myArtists: LiveData<List<Artist>> = _myArtists
 
     init {
-
+        getMyArtists()
     }
 
     private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
