@@ -23,20 +23,16 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getMyGenres()
-        viewModel.getAllGenres()
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         genreChipGroup = binding.genreChipGroup
-        //myGenres = mutableListOf()
+        myGenres = mutableListOf()
         viewModel.myGenres.observe(viewLifecycleOwner, Observer {
             myGenres = it.toMutableList()
-            Timber.d("${myGenres}")
-
         })
 
         viewModel.genres.observe(viewLifecycleOwner, Observer {
@@ -59,7 +55,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
     private fun initGenreSaveView() {
         binding.genreSaveButton.setOnClickListener {
             val distinctMyGenres = myGenres.distinct()
-            Timber.d( "${myGenres}")
+            Timber.d( "${distinctMyGenres}")
 
             if (distinctMyGenres.size <= 5) {
                 viewModel.saveMyGenres(distinctMyGenres)
@@ -77,17 +73,19 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             chip.apply {
                 text = genre.name
                 isCheckable = true
-                setOnCheckedChangeListener { compoundButton, isChecked ->
-                    if (isChecked) {
-                        myGenres.add(Genre(name = genre.name, true))
-                    } else {
-                        myGenres.remove(Genre(name = genre.name, false))
-                    }
-                }
                 if (myGenres.any { it.name == genre.name }) {
                     Timber.d( "${genre}")
                     isChecked = true
                 }
+                setOnCheckedChangeListener { compoundButton, isChecked ->
+                    if (isChecked) {
+                        myGenres.add(Genre(name = genre.name, true))
+                    } else {
+                        Timber.d( "${genre.name}")
+                        myGenres.remove(Genre(name = genre.name, true))
+                    }
+                }
+
             }
 
             genreChipGroup.addView(chip)
