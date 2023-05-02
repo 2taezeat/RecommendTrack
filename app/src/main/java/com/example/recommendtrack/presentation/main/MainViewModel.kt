@@ -21,14 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getTokenUseCase: GetTokenUseCase,
-    private val getArtistUseCase: GetArtistUseCase,
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
 
     init {
         getToken()
-        getArtist()
     }
 
     private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
@@ -58,15 +56,7 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun getArtist() {
-        viewModelScope.launch {
-            val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            getArtistUseCase.invoke(accessToken, "artist:2pac").collect { it ->
-                Timber.d("${it}")
 
-            }
-        }
-    }
 
 
 
