@@ -1,18 +1,15 @@
 package com.example.recommendtrack.di
 
-import com.example.recommendtrack.data.datasource.GenreRemoteDataSource
-import com.example.recommendtrack.data.datasource.TokenRemoteDataSource
+import com.example.recommendtrack.data.repositoryImp.ArtistRepositoryImp
 import com.example.recommendtrack.data.repositoryImp.GenreRepositoryImp
 import com.example.recommendtrack.data.repositoryImp.TokenRepositoryImp
+import com.example.recommendtrack.domain.repository.ArtistRepository
 import com.example.recommendtrack.domain.repository.GenreRepository
 import com.example.recommendtrack.domain.repository.TokenRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
-
 
 
 @Module
@@ -30,6 +27,11 @@ abstract class RepositoryModule {
         tokenRepositoryImp: TokenRepositoryImp
     ): TokenRepository
 
+
+    @Binds
+    abstract fun bindArtistRepository(
+        artistRepositoryImp: ArtistRepositoryImp
+    ): ArtistRepository
 
 
 

@@ -1,17 +1,11 @@
 package com.example.recommendtrack.di
 
-import com.example.recommendtrack.data.datasource.GenreRemoteDataSource
-import com.example.recommendtrack.data.datasource.GenreRemoteDataSourceImp
-import com.example.recommendtrack.data.datasource.TokenRemoteDataSource
-import com.example.recommendtrack.data.datasource.TokenRemoteDataSourceImp
-import com.example.recommendtrack.data.remote.GenreApi
+import com.example.recommendtrack.data.datasource.*
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 
 
 @Module
@@ -27,4 +21,9 @@ abstract class DataSourceModule {
     @Binds
     abstract fun bindsTokenRemoteDataSource(dataSource: TokenRemoteDataSourceImp): TokenRemoteDataSource
 
+
+
+    @Singleton
+    @Binds
+    abstract fun bindsArtistRemoteDataSource(dataSource: ArtistRemoteDataSourceImp): ArtistRemoteDataSource
 }

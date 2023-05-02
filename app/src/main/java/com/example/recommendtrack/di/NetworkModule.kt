@@ -1,5 +1,6 @@
 package com.example.recommendtrack.di
 
+import com.example.recommendtrack.data.remote.ArtistApi
 import com.example.recommendtrack.data.remote.GenreApi
 import com.example.recommendtrack.data.remote.TokenApi
 import com.example.recommendtrack.utils.Constants.BASE_URL
@@ -15,8 +16,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
@@ -98,6 +97,12 @@ object NetworkModule {
         return retrofit.create(TokenApi::class.java)
     }
 
+
+    @Singleton
+    @Provides
+    fun provideArtistApi(@ContentRetrofit retrofit: Retrofit): ArtistApi {
+        return retrofit.create(ArtistApi::class.java)
+    }
 
 
 
