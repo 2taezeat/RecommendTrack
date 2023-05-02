@@ -37,7 +37,6 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistFollowersTextView.text = it.followers.toString()
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
-
         })
 
 
