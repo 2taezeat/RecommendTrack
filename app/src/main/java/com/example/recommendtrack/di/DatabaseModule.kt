@@ -2,6 +2,8 @@ package com.example.recommendtrack.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.recommendtrack.data.database.ArtistDao
+import com.example.recommendtrack.data.database.ArtistDatabase
 import com.example.recommendtrack.data.database.GenreDao
 import com.example.recommendtrack.data.database.GenreDatabase
 import com.example.recommendtrack.utils.Constants.GENRE_DATABASE_NAME
@@ -30,12 +32,27 @@ object DatabaseModule {
         ).build()
     }
 
-
-
     @Provides
     @Singleton
     fun provideGenreDao(db: GenreDatabase): GenreDao {
         return db.genreDao()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideArtistDataBase(@ApplicationContext context: Context): ArtistDatabase {
+        return Room.databaseBuilder(
+            context,
+            ArtistDatabase::class.java,
+            GENRE_DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideArtistDao(db: ArtistDatabase): ArtistDao {
+        return db.artistDao()
     }
 
 }
