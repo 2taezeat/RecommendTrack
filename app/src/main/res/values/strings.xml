@@ -22,10 +22,13 @@
     <string name="artist_followers">Followers</string>
     <string name="artist_genres">Genres</string>
     <string name="artist_popularity">Popularity</string>
+    <string name="artist_my_add">Add My Artist</string>
+    <string name="artist_my_delete">Delete My Artist</string>
 
 
 
-<!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
+
+    <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 
 
 </resources>
