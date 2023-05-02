@@ -43,14 +43,12 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     }
 
-
-    companion object {
-        fun newInstance() =
-            GenreFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+    override fun onStop() {
+        super.onStop()
+        viewModel.getMyGenres()
     }
+
+
 
     private fun initGenreSaveView() {
         binding.genreSaveButton.setOnClickListener {
@@ -91,6 +89,15 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             genreChipGroup.addView(chip)
         }
 
+    }
+
+
+    companion object {
+        fun newInstance() =
+            GenreFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
     }
 
 
