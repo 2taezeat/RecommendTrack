@@ -8,7 +8,7 @@ interface ArtistRepository {
     suspend fun searchArtist(accessToken: String, artistName: String): Flow<Artist>
 
 
-    suspend fun fetchMyArtist(): Flow<List<Artist>>
+    suspend fun fetchMyArtists(): Flow<List<Artist>>
 
     suspend fun addMyArtist(myArtist : Artist)
 

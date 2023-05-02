@@ -40,8 +40,8 @@ class ArtistRepositoryImp
         return flowArtist
     }
 
-    override suspend fun fetchMyArtist(): Flow<List<Artist>> {
-        return artistDao.getMyArtist().flowOn(ioDispatcher)
+    override suspend fun fetchMyArtists(): Flow<List<Artist>> {
+        return artistDao.getMyArtists().flowOn(ioDispatcher)
     }
 
     override suspend fun addMyArtist(myArtist: Artist) {

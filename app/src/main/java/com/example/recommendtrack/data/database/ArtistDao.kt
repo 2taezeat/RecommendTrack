@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface ArtistDao {
 
     @Query("SELECT * FROM artist")
-    fun getMyArtist(): Flow<List<Artist>>
+    fun getMyArtists(): Flow<List<Artist>>
 
 
     @Insert
