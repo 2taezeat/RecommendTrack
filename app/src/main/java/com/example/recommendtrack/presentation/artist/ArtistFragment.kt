@@ -12,6 +12,7 @@ import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.ui.BaseFragment
 import com.example.recommendtrack.presentation.ui.artist.ArtistViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
@@ -23,6 +24,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var artistGenresTextView: TextView
     private lateinit var addMyArtistButton: Button
     private lateinit var deleteMyArtistButton: Button
+    private lateinit var isMyButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,17 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistFollowersTextView.text = it.followers.toString()
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
+
+            if (viewModel.myArtists.value!!.contains(it)) {
+                isMyButton.text = "isMyAdded"
+            } else {
+                isMyButton.text = "Not_isMyAdded"
+            }
+
+        })
+
+        viewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
+
         })
 
 
@@ -54,6 +67,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private fun initButtonView() {
         addMyArtistButton = binding.artistAddButton
         deleteMyArtistButton = binding.artistDeleteButton
+        isMyButton = binding.artistIsMyButton
 
         addMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {

@@ -71,6 +71,7 @@ class ArtistViewModel @Inject constructor(
     fun getMyArtists() {
         viewModelScope.launch {
             _myArtists.value = getMyArtistsUseCase.invoke().first()
+            Timber.d("${_myArtists.value}")
         }
     }
 
