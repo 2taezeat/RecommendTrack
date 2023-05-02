@@ -10,6 +10,9 @@ interface GenreRepository {
 
     suspend fun addMyGenres(myGenres : List<Genre>)
 
+    suspend fun deleteMyGenres(myGenres : List<Genre>)
+
+    suspend fun updateMyGenres(myGenres : List<Genre>)
 
 
 }

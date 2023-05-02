@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 class GenreRepositoryImp
@@ -46,5 +47,13 @@ class GenreRepositoryImp
 
     override suspend fun fetchMyGenres(): Flow<List<Genre>> {
         return genreDao.getMyGenres().flowOn(ioDispatcher)
+    }
+
+    override suspend fun deleteMyGenres(myGenres : List<Genre>) {
+        genreDao.deleteMyGenres(myGenres)
+    }
+
+    override suspend fun updateMyGenres(myGenres: List<Genre>) {
+        genreDao.updateMyGenre(myGenres)
     }
 }

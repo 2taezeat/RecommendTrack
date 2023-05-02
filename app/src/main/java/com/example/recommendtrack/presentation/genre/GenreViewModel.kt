@@ -7,10 +7,9 @@ import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.domain.usecase.UpdateMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.GetMyGenresUseCase
-import com.example.recommendtrack.domain.usecase.SaveMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.AddMyGenresUseCase
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GenreViewModel @Inject constructor(
     private val getAllGenreUseCase: GetAllGenreUseCase,
-    private val saveMyGenresUseCase: SaveMyGenresUseCase,
+    private val addMyGenresUseCase: AddMyGenresUseCase,
     private val getMyGenresUseCase: GetMyGenresUseCase,
     private val deleteMyGenresUseCase: UpdateMyGenresUseCase,
     private val dataStore: DataStore<Preferences>
@@ -54,9 +53,9 @@ class GenreViewModel @Inject constructor(
     }
 
 
-    fun saveMyGenres(myGenres: List<Genre>) {
+    fun addMyGenres(myGenres: List<Genre>) {
         viewModelScope.launch {
-            saveMyGenresUseCase.invoke(myGenres)
+            addMyGenresUseCase.invoke(myGenres)
         }
     }
 
