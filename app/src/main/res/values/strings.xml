@@ -17,6 +17,14 @@
     <string name="genre_delete_only_success_toast">So, Only deletion is reflected in the genre selection</string>
     <string name="genre_add_delete_both_success_toast">Delete and add in the genre selection will be reflected</string>
 
+    <string name="artist_searchbar_hint">searchbar_hint</string>
+    <string name="artist_name">Name</string>
+    <string name="artist_followers">Followers</string>
+    <string name="artist_genres">Genres</string>
+    <string name="artist_popularity">Popularity</string>
+
+
+
 <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
 
 

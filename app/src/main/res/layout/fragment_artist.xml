@@ -6,14 +6,134 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/artist_main_cl"
+
         tools:context=".presentation.artist.ArtistFragment">
 
-        <TextView
+        <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="artist">
+            android:layout_height="70dp"
+            android:id="@+id/artist_search_view"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="20dp"
+            >
 
+        </androidx.appcompat.widget.SearchView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_search_view"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_name_tv"
+            android:text="@string/artist_name"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            >
         </TextView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_name_content_tv"
+            tools:text="@string/artist_name"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_name_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_followers_tv"
+            android:text="@string/artist_followers"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_name_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_followers_content_tv"
+            tools:text="@string/artist_name"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_followers_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_popularity_tv"
+            android:text="@string/artist_popularity"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_followers_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_popularity_content_tv"
+            tools:text="@string/artist_name"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_popularity_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_genres_tv"
+            android:text="@string/artist_genres"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/artist_popularity_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
+            android:id="@+id/artist_genres_content_tv"
+            tools:text="@string/artist_name"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="80dp"
+            >
+        </TextView>
+
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
