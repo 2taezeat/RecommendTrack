@@ -25,17 +25,17 @@ class GenreViewModel @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
-
-    init {
-        getMyGenres()
-        getAllGenres()
-    }
-
     private val _genres = MutableLiveData<List<Genre>>()
     val genres: LiveData<List<Genre>> = _genres
 
     private val _myGenres = MutableLiveData<List<Genre>>()
     val myGenres: LiveData<List<Genre>> = _myGenres
+
+
+    init {
+        getAllGenres()
+        getMyGenres()
+    }
 
 
     private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
@@ -61,7 +61,7 @@ class GenreViewModel @Inject constructor(
     }
 
     fun getMyGenres() {
-        viewModelScope.async {
+        viewModelScope.launch {
             _myGenres.value = getMyGenresUseCase.invoke().first()
         }
     }
