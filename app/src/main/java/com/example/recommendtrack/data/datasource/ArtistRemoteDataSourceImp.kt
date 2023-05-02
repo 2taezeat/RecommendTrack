@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class ArtistRemoteDataSourceImp @Inject constructor(private val artistApi: ArtistApi) :
     ArtistRemoteDataSource {
 
-    override suspend fun fetchArtist(
+    override suspend fun searchArtist(
         accessToken: String,
         artistName: String
     ): ApiResponse<ArtistDto> {

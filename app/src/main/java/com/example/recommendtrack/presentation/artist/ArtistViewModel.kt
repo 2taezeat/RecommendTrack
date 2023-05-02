@@ -35,7 +35,7 @@ class ArtistViewModel @Inject constructor(
         preferences[PreferenceKey.tokenPreferenceKey] ?: ""
     }
 
-    fun getArtist(artistName: String) {
+    fun searchArtist(artistName: String) {
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
             getArtistUseCase.invoke(accessToken, "artist:${artistName}").collect { it ->

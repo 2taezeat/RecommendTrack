@@ -20,8 +20,8 @@ import javax.inject.Inject
 class ArtistRepositoryImp
 @Inject constructor(private val dataSource: ArtistRemoteDataSource, private val ioDispatcher: CoroutineDispatcher, private val artistDao: ArtistDao) : ArtistRepository {
 
-    override suspend fun fetchArtist(accessToken: String, artistName: String): Flow<Artist> {
-        val response = dataSource.fetchArtist(accessToken, artistName)
+    override suspend fun searchArtist(accessToken: String, artistName: String): Flow<Artist> {
+        val response = dataSource.searchArtist(accessToken, artistName)
 
         val flowArtist = flow {
             response.suspendOnSuccess(ArtistMapper) {

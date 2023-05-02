@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.databinding.adapters.SearchViewBindingAdapter.setOnQueryTextListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
@@ -62,7 +61,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(searchString: String): Boolean {
-                    viewModel.getArtist(searchString)
+                    viewModel.searchArtist(searchString)
                     return true
                 }
 

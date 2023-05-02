@@ -6,5 +6,5 @@ import com.skydoves.sandwich.ApiResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ArtistRemoteDataSource {
-    suspend fun fetchArtist(accessToken: String, artistName: String): ApiResponse<ArtistDto>
+    suspend fun searchArtist(accessToken: String, artistName: String): ApiResponse<ArtistDto>
 }
