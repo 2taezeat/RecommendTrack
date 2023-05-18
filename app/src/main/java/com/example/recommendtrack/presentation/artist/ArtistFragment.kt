@@ -12,10 +12,11 @@ import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
-    private val viewModel by viewModels<ArtistViewModel>()
+    val viewModel by viewModels<ArtistViewModel>()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView
@@ -29,6 +30,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("${viewModel}")
     }
 
 
