@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentRecommendTrackBinding
-import com.example.recommendtrack.presentation.ui.BaseFragment
+import com.example.recommendtrack.presentation.BaseFragment
 import com.example.recommendtrack.presentation.ui.recommendtrack.RecommendTrackViewModel
 import timber.log.Timber
 
