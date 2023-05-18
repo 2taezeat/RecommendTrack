@@ -1,7 +1,6 @@
 package com.example.recommendtrack.domain.repository
 
 import com.example.recommendtrack.domain.entity.Artist
-import com.example.recommendtrack.domain.entity.Genre
 import kotlinx.coroutines.flow.Flow
 
 interface ArtistRepository {
@@ -10,8 +9,8 @@ interface ArtistRepository {
 
     suspend fun fetchMyArtists(): Flow<List<Artist>>
 
-    suspend fun addMyArtist(myArtist : Artist)
+    suspend fun addMyArtist(myArtist: Artist)
 
-    suspend fun deleteMyArtist(deletingArtist : Artist)
+    suspend fun deleteMyArtist(deletingArtist: Artist)
 
 }
