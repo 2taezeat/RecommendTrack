@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.ui
+package com.example.recommendtrack.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 

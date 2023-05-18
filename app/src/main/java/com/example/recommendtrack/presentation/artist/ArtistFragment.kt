@@ -9,10 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
-import com.example.recommendtrack.presentation.ui.BaseFragment
-import com.example.recommendtrack.presentation.ui.artist.ArtistViewModel
+import com.example.recommendtrack.presentation.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {

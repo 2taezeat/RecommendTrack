@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.ui.artist
+package com.example.recommendtrack.presentation.artist
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Artist
-import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.domain.usecase.artist.AddMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.DeleteMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.GetMyArtistsUseCase

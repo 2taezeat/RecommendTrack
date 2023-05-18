@@ -1,16 +1,21 @@
-package com.example.recommendtrack.presentation.ui.artist
+package com.example.recommendtrack.presentation.genre
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Genre
+import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
-import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.ui.artist
+package com.example.recommendtrack.presentation.genre
 
 import android.os.Bundle
 import android.view.View
@@ -8,11 +8,10 @@ import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentGenreBinding
 import com.example.recommendtrack.domain.entity.Genre
-import com.example.recommendtrack.presentation.ui.BaseFragment
+import com.example.recommendtrack.presentation.BaseFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {

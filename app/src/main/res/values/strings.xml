@@ -3,6 +3,7 @@
     <string name="recommend_track_fragment">recommend_track_fragment</string>
     <string name="artist_fragment">artist_fragment</string>
     <string name="genre_fragment">genre_fragment</string>
+    <string name="my_artist_fragment">my_artist_fragment</string>
 
 
     <string name="recommend_track_menu">Recommend</string>
@@ -26,6 +27,7 @@
     <string name="artist_my_delete">Delete My Artist</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_artist_button">My Artist</string>
 
 
     <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
