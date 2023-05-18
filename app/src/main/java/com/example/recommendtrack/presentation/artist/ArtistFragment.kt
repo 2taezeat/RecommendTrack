@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
@@ -23,6 +24,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var addMyArtistButton: Button
     private lateinit var deleteMyArtistButton: Button
     private lateinit var isMyButton: Button
+    private lateinit var myArtistNaviButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +68,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         addMyArtistButton = binding.artistAddButton
         deleteMyArtistButton = binding.artistDeleteButton
         isMyButton = binding.artistIsMyButton
+        myArtistNaviButton = binding.myArtistNaviButton
 
         addMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {
@@ -77,6 +80,10 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             viewModel.searchArtist.value?.let {
                 viewModel.deleteMyArtist(it)
             }
+        }
+
+        myArtistNaviButton.setOnClickListener {
+            findNavController().navigate(R.id.action_ArtistFragment_to_MyArtistFragment)
         }
 
     }

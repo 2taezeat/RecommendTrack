@@ -16,14 +16,27 @@
         android:id="@+id/ArtistFragment"
         android:name="com.example.recommendtrack.presentation.artist.ArtistFragment"
         android:label="@string/artist_fragment"
-        tools:layout="@layout/fragment_artist" />
+        tools:layout="@layout/fragment_artist" >
+        <action
+            android:id="@+id/action_ArtistFragment_to_MyArtistFragment"
+            app:destination="@id/MyArtistFragment"
+
+            />
+    </fragment>
 
 
     <fragment
         android:id="@+id/GenreFragment"
-        android:name="com.example.recommendtrack.presentation.ui.artist.GenreFragment"
+        android:name="com.example.recommendtrack.presentation.genre.GenreFragment"
         android:label="@string/artist_fragment"
         tools:layout="@layout/fragment_genre" />
+
+
+    <fragment
+        android:id="@+id/MyArtistFragment"
+        android:name="com.example.recommendtrack.presentation.artist.MyArtistFragment"
+        android:label="@string/my_artist_fragment"
+        tools:layout="@layout/fragment_my_artist" />
 
 
 </navigation>
