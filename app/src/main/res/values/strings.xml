@@ -24,8 +24,8 @@
     <string name="artist_popularity">Popularity</string>
     <string name="artist_my_add">Add My Artist</string>
     <string name="artist_my_delete">Delete My Artist</string>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->
