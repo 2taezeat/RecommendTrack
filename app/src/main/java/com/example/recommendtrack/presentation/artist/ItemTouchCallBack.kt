@@ -1,6 +1,5 @@
 package com.example.recommendtrack.presentation.artist
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -10,8 +9,10 @@ import android.graphics.RectF
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recommendtrack.R
+import timber.log.Timber
 
-class ItemTouchCallback(val context: Context, private val listener: ItemTouchHelperListener): ItemTouchHelper.Callback() {
+class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouchHelper.Callback() {
+
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
@@ -20,9 +21,28 @@ class ItemTouchCallback(val context: Context, private val listener: ItemTouchHel
         return makeMovementFlags(dragFlags, swipeFlags)
     }
 
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        super.onSelectedChanged(viewHolder, actionState)
+        if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+            viewHolder?.itemView?.alpha = 0.5f
+        }
+    }
+
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        super.clearView(recyclerView, viewHolder)
+        viewHolder?.itemView?.alpha = 1.0f
+
+    }
+
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-        return false
+        val reOrderView = (viewHolder as MyArtistViewHolder).itemMyArtistBinding.myArtistReOrderIV
+        Timber.d("${         reOrderView.isActivated}")
+        Timber.d("${         reOrderView.isInTouchMode}")
+        Timber.d("${         reOrderView.isFocused}")
+        Timber.d("${         reOrderView.isFocusableInTouchMode}")
+
+        listener.onItemMove(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
+        return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

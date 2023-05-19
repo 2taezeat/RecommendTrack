@@ -7,7 +7,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/my_artist_item_main_cl"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:foreground="?attr/selectableItemBackground"
+        >
 
         <ImageView
             android:layout_width="60dp"

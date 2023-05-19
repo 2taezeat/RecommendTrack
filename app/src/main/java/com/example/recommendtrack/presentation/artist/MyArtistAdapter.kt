@@ -33,7 +33,11 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
     }
 
     override fun onItemMove(from: Int, to: Int) {
-
-
+        val item: Artist = currentList[from]
+        val newList = ArrayList<Artist>()
+        newList.addAll(currentList)
+        newList.removeAt(from)
+        newList.add(to, item)
+        submitList(newList)
     }
 }

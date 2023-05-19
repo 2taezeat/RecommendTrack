@@ -21,7 +21,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var myArtistAdapter: MyArtistAdapter
     private val artistViewModel: ArtistViewModel by activityViewModels()
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
-    private val itemTouchHelper by lazy { ItemTouchHelper( ItemTouchCallback( requireContext(),listener = myArtistAdapter) ) }
+    private val itemTouchHelper by lazy { ItemTouchHelper( ItemTouchCallback( listener = myArtistAdapter) ) }
 
 
     override fun onAttach(context: Context) {
