@@ -19,7 +19,13 @@
         tools:layout="@layout/fragment_artist" >
         <action
             android:id="@+id/action_ArtistFragment_to_MyArtistFragment"
-            app:destination="@id/MyArtistFragment">
+            app:destination="@id/MyArtistFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+
+            >
 
         </action>
 
@@ -40,6 +46,19 @@
         android:label="@string/my_artist_fragment"
         tools:layout="@layout/fragment_my_artist">
 
+        <action
+            android:id="@+id/action_MyArtistFragment_to_ArtistInfoFragment"
+            app:destination="@id/ArtistInfoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+
+
+            />
+
+
+
     </fragment>
 
 
@@ -49,6 +68,12 @@
         android:name="com.example.recommendtrack.presentation.artist.ArtistInfoFragment"
         android:label="@string/artist_info_fragment"
         tools:layout="@layout/fragment_artist_info">
+
+        <argument
+            android:name="artist"
+            app:argType="com.example.recommendtrack.domain.entity.Artist">
+
+        </argument>
 
     </fragment>
 

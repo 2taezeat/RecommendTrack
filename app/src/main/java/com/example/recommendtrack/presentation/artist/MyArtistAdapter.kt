@@ -10,6 +10,17 @@ import java.util.Collections
 
 class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack), ItemTouchHelperListener {
 
+
+
+    private var onItemClickListener: ((Artist) -> Unit)? = null
+
+    fun setOnItemClickListener(lambdaListener: (Artist) -> Unit) {
+        onItemClickListener = lambdaListener
+    }
+
+
+
+
     companion object {
         private val artistDiffUtilCallBack = object : DiffUtil.ItemCallback<Artist>() {
             override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
@@ -30,6 +41,9 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
     override fun onBindViewHolder(holder: MyArtistViewHolder, position: Int) {
         val myArtist = currentList[position]
         holder.bind(artist = myArtist)
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let{ it(myArtist) }
+        }
 
     }
 

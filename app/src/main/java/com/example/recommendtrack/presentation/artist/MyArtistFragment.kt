@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,6 +69,12 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
             adapter = myArtistAdapter
+        }
+
+        myArtistAdapter.setOnItemClickListener {
+            val action = MyArtistFragmentDirections.actionMyArtistFragmentToArtistInfoFragment(it)
+            findNavController().navigate(action)
+
         }
 
         itemTouchHelper.attachToRecyclerView(myArtistRecyclerView)
