@@ -3,6 +3,7 @@ package com.example.recommendtrack.presentation.artist
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -24,7 +25,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var artistGenresTextView: TextView
     private lateinit var addMyArtistButton: Button
     private lateinit var deleteMyArtistButton: Button
-    private lateinit var isMyButton: Button
+    private lateinit var isMyArtist: ImageView
     private lateinit var myArtistNaviButton: Button
 
 
@@ -46,9 +47,12 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistGenresTextView.text = it.genres.toString()
 
             if (viewModel.myArtists.value!!.contains(it)) {
-                isMyButton.text = "isMyAdded"
+                //isMyArtist.text = "isMyAdded"
+                isMyArtist.setImageResource(R.drawable.baseline_favorite_24)
             } else {
-                isMyButton.text = "Not_isMyAdded"
+                //isMyArtist.text = "Not_isMyAdded"
+                isMyArtist.setImageResource(R.drawable.baseline_favorite_border_24)
+
             }
 
         })
@@ -69,7 +73,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private fun initButtonView() {
         addMyArtistButton = binding.artistAddButton
         deleteMyArtistButton = binding.artistDeleteButton
-        isMyButton = binding.artistIsMyButton
+        isMyArtist = binding.artistIsMyIV
         myArtistNaviButton = binding.myArtistNaviButton
 
         addMyArtistButton.setOnClickListener {
