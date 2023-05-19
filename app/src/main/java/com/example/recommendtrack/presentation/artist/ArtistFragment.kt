@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.recommendtrack.R
@@ -17,7 +17,7 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
-    private val viewModel by viewModels<ArtistViewModel>()
+    private val viewModel: ArtistViewModel by activityViewModels()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView
@@ -47,12 +47,9 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistGenresTextView.text = it.genres.toString()
 
             if (viewModel.myArtists.value!!.contains(it)) {
-                //isMyArtist.text = "isMyAdded"
                 isMyArtist.setImageResource(R.drawable.baseline_favorite_24)
             } else {
-                //isMyArtist.text = "Not_isMyAdded"
                 isMyArtist.setImageResource(R.drawable.baseline_favorite_border_24)
-
             }
 
         })

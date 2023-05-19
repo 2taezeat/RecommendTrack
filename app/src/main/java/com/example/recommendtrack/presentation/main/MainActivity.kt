@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.ActivityMainBinding
+import com.example.recommendtrack.presentation.artist.ArtistViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -15,7 +16,9 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val viewModel : MainViewModel by viewModels()
+    private val mainViewModel : MainViewModel by viewModels()
+    private val artistViewModel : ArtistViewModel by viewModels()
+
 
 
 
@@ -23,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initBottomNavView()
-        Timber.d("${viewModel}")
-
-
-
-
+        Timber.d("${mainViewModel}")
+        Timber.d("${artistViewModel}")
     }
 
     private fun getNavController(): NavController {

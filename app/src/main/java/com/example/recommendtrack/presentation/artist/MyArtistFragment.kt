@@ -2,6 +2,7 @@ package com.example.recommendtrack.presentation.artist
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +18,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var myArtistRecyclerView: RecyclerView
     private val args: MyArtistFragmentArgs by navArgs()
     private lateinit var myArtistAdapter: MyArtistAdapter
+    private val viewModel: ArtistViewModel by activityViewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("${ args }")
+        Timber.d("${ viewModel }")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +52,10 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
         }
 
     }
+
+//    override fun deleteMyArtist(deleteArtist: Artist) {
+//        TODO("Not yet implemented")
+//    }
 
 
 }
