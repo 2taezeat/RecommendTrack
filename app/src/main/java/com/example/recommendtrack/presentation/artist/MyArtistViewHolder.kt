@@ -28,6 +28,7 @@ class MyArtistViewHolder(val itemMyArtistBinding: ItemMyArtistBinding, private v
                 myArtistUpdateCallBack?.getMyArtist()
             }
 
+
         }
     }
 

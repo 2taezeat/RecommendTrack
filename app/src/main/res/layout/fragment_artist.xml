@@ -4,177 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/artist_main_cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/artist_main_cl"
 
         tools:context=".presentation.artist.ArtistFragment">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/artist_search_view"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/artist_search_view"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="20dp"
+            app:layout_constraintTop_toTopOf="parent"
             >
 
         </androidx.appcompat.widget.SearchView>
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/includeArtistInfoLayout"
+            layout="@layout/artist_info_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/artist_search_view"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_name_tv"
-            android:text="@string/artist_name"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             >
-        </TextView>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_search_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_name_content_tv"
-            tools:text="@string/artist_name"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
+        </include>
 
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_name_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_followers_tv"
-            android:text="@string/artist_followers"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_name_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_followers_content_tv"
-            tools:text="@string/artist_name"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_followers_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_popularity_tv"
-            android:text="@string/artist_popularity"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_followers_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_popularity_content_tv"
-            tools:text="@string/artist_name"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_popularity_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_genres_tv"
-            android:text="@string/artist_genres"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/artist_popularity_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp"
-            android:id="@+id/artist_genres_content_tv"
-            tools:text="@string/artist_name"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="80dp"
-            >
-        </TextView>
 
 
         <Button
+            android:id="@+id/myArtistNaviButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:id="@+id/myArtistNaviButton"
-            android:textColor="@android:color/holo_red_dark"
             android:text="@string/my_artist_button"
-            />
-
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <CheckBox
+            android:id="@+id/artistIsMyCheckBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="160dp"
-            android:id="@+id/artistIsMyCheckBox"
             android:button="@drawable/favorite_checkbox"
             android:buttonTint="#E91E63"
-            />
-
-
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <Button
+            android:id="@+id/artist_refresh_token_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="refresh token"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="60dp"
-            android:id="@+id/artist_refresh_token_button"
-            />
-
-
-
-
-
+            android:text="refresh token"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -110,10 +110,10 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     }
 
     private fun initContentTextView() {
-        artistNameTextView = binding.artistNameContentTv
-        artistFollowersTextView = binding.artistFollowersContentTv
-        artistPopularityTextView = binding.artistPopularityContentTv
-        artistGenresTextView = binding.artistGenresContentTv
+        artistNameTextView = binding.includeArtistInfoLayout.artistNameContentTv
+        artistFollowersTextView = binding.includeArtistInfoLayout.artistFollowersContentTv
+        artistPopularityTextView = binding.includeArtistInfoLayout.artistPopularityContentTv
+        artistGenresTextView = binding.includeArtistInfoLayout.artistGenresContentTv
     }
 
 

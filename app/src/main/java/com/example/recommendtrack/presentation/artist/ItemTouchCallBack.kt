@@ -42,6 +42,9 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouc
         Timber.d("${         reOrderView.isFocusableInTouchMode}")
 
         listener.onItemMove(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
+
+
+
         return true
     }
 
