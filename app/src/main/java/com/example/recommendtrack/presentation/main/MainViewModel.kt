@@ -11,8 +11,11 @@ import com.example.recommendtrack.utils.Constants.SPOTIFY_CLIENT_SECRET
 import com.example.recommendtrack.utils.Constants.SPOTIFY_GRANT_TYPE
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -53,6 +56,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
+    fun refreshToken() {
+        viewModelScope.launch {
+            removeToken()
+            getToken()
+        }
+    }
+
+    private suspend fun removeToken() {
+        writeTokenDataStore("")
+        Timber.d("removeToken")
+    }
 
 
 

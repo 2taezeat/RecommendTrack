@@ -18,7 +18,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     private lateinit var myArtistRecyclerView: RecyclerView
     private lateinit var myArtistAdapter: MyArtistAdapter
-    private val viewModel: ArtistViewModel by activityViewModels()
+    private val artistViewModel: ArtistViewModel by activityViewModels()
 
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
 
@@ -31,14 +31,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("${ viewModel }")
+        Timber.d("${ artistViewModel }")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
 
-        viewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
+        artistViewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
             myArtistAdapter.submitList(it)
         })
 
@@ -59,7 +59,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     private fun initRecyclerView() {
         myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
-        myArtistAdapter.submitList(viewModel.myArtists.value)
+        myArtistAdapter.submitList(artistViewModel.myArtists.value)
         myArtistRecyclerView = binding.myArtistRV
         myArtistRecyclerView.apply {
             setHasFixedSize(false)

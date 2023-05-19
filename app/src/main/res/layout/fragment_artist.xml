@@ -159,5 +159,23 @@
 
 
 
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="refresh token"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="60dp"
+            android:id="@+id/artist_refresh_token_button"
+            />
+
+
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

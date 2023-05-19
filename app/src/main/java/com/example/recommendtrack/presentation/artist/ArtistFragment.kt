@@ -13,12 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
+import com.example.recommendtrack.presentation.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
-    private val viewModel: ArtistViewModel by activityViewModels()
+    private val artistViewModel: ArtistViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView
@@ -26,6 +28,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var artistGenresTextView: TextView
     private lateinit var artistIsMyCheckBox: CheckBox
     private lateinit var myArtistNaviButton: Button
+    private lateinit var refreshTokenButton: Button
 
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
 
@@ -39,7 +42,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("${viewModel}")
+        Timber.d("${artistViewModel}")
     }
 
 
@@ -48,13 +51,13 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         initView()
 
 
-        viewModel.searchArtist.observe(viewLifecycleOwner, Observer { it ->
+        artistViewModel.searchArtist.observe(viewLifecycleOwner, Observer { it ->
             artistNameTextView.text = it.name
             artistFollowersTextView.text = it.followers.toString()
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
 
-            artistIsMyCheckBox.isChecked = viewModel.myArtists.value!!.contains(it)
+            artistIsMyCheckBox.isChecked = artistViewModel.myArtists.value!!.contains(it)
         })
 
     }
@@ -77,6 +80,10 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         artistIsMyCheckBox = binding.artistIsMyCheckBox
         myArtistNaviButton = binding.myArtistNaviButton
 
+        refreshTokenButton = binding.artistRefreshTokenButton
+        refreshTokenButton.setOnClickListener {
+            mainViewModel.refreshToken()
+        }
 
 
         myArtistNaviButton.setOnClickListener {
@@ -87,12 +94,12 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
         artistIsMyCheckBox.setOnClickListener { it ->
             if (artistIsMyCheckBox.isChecked) {
-                viewModel.searchArtist.value?.let {
+                artistViewModel.searchArtist.value?.let {
                     myArtistUpdateCallBack?.addMyArtist(it)
                     myArtistUpdateCallBack?.getMyArtist()
                 }
             } else {
-                viewModel.searchArtist.value?.let {
+                artistViewModel.searchArtist.value?.let {
                     myArtistUpdateCallBack?.deleteMyArtist(it)
                     myArtistUpdateCallBack?.getMyArtist()
                 }
@@ -115,7 +122,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(searchString: String): Boolean {
-                    viewModel.searchArtist(searchString)
+                    artistViewModel.searchArtist(searchString)
                     return true
                 }
 
