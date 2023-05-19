@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
-    val viewModel by viewModels<ArtistViewModel>()
+    private val viewModel by viewModels<ArtistViewModel>()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView

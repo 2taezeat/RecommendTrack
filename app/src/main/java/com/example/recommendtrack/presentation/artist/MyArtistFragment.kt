@@ -14,8 +14,9 @@ import timber.log.Timber
 
 class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment_my_artist) {
 
-    private lateinit var myArtistRecyclerView:  RecyclerView
-    private val args : MyArtistFragmentArgs by navArgs()
+    private lateinit var myArtistRecyclerView: RecyclerView
+    private val args: MyArtistFragmentArgs by navArgs()
+    private lateinit var myArtistAdapter: MyArtistAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,13 +37,16 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
 
     private fun initRecyclerView() {
+        myArtistAdapter = MyArtistAdapter()
+        myArtistAdapter.submitList(args.myArtistList.toList())
         myArtistRecyclerView = binding.myArtistRV
         myArtistRecyclerView.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-            adapter = MyArtistAdapter()
+            adapter = myArtistAdapter
         }
+
     }
 
 
