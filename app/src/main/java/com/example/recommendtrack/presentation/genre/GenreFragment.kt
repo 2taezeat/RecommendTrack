@@ -2,7 +2,6 @@ package com.example.recommendtrack.presentation.genre
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
@@ -11,6 +10,7 @@ import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.presentation.BaseFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,11 +63,11 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             if (distinctMyGenres.size <= 5) {
                 viewModel.addMyGenres(distinctMyGenres)
                 viewModel.deleteMyGenres(distinctDeleteGenres)
-                Toast.makeText(this.context, R.string.genre_add_delete_both_success_toast, Toast.LENGTH_LONG).show()
+                Snackbar.make(it, R.string.genre_add_delete_both_success_message, Snackbar.LENGTH_LONG).show()
 
             } else {
-                Toast.makeText(this.context, R.string.genre_add_only_five_genre_toast, Toast.LENGTH_LONG).show()
-                Toast.makeText(this.context, R.string.genre_delete_only_success_toast, Toast.LENGTH_LONG).show()
+                Snackbar.make(it, R.string.genre_add_only_five_genre_message, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(it, R.string.genre_delete_only_success_message, Snackbar.LENGTH_LONG).show()
                 viewModel.deleteMyGenres(distinctDeleteGenres)
             }
         }

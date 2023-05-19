@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.recommendtrack.databinding.ItemMyArtistBinding
 import com.example.recommendtrack.domain.entity.Artist
+import com.google.android.material.snackbar.Snackbar
 
 
 class MyArtistViewHolder(private val itemMyArtistBinding: ItemMyArtistBinding, private val myArtistUpdateCallBack: MyArtistUpdateCallBack?) :
@@ -23,6 +24,7 @@ class MyArtistViewHolder(private val itemMyArtistBinding: ItemMyArtistBinding, p
 
             itemMyArtistBinding.myArtistFavoriteIV.setOnClickListener {
                 myArtistUpdateCallBack?.deleteMyArtist(deleteArtist = artist)
+                Snackbar.make(it, "Item $layoutPosition touched!", Snackbar.LENGTH_LONG).show()
             }
 
         }

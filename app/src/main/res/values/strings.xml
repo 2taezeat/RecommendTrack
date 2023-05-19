@@ -14,9 +14,9 @@
 
     <string name="genre_save">Save My Genre</string>
 
-    <string name="genre_add_only_five_genre_toast">You can choose up to 5 genres!</string>
-    <string name="genre_delete_only_success_toast">So, Only deletion is reflected in the genre selection</string>
-    <string name="genre_add_delete_both_success_toast">Delete and add in the genre selection will be reflected</string>
+    <string name="genre_add_only_five_genre_message">You can choose up to 5 genres!</string>
+    <string name="genre_delete_only_success_message">So, Only deletion is reflected in the genre selection</string>
+    <string name="genre_add_delete_both_success_message">Delete and add in the genre selection will be reflected</string>
 
     <string name="artist_searchbar_hint">searchbar_hint</string>
     <string name="artist_name">Name</string>
