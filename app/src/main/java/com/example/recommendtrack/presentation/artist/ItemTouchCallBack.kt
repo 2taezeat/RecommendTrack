@@ -9,7 +9,6 @@ import android.graphics.RectF
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recommendtrack.R
-import timber.log.Timber
 
 class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouchHelper.Callback() {
 
@@ -35,16 +34,7 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouc
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        val reOrderView = (viewHolder as MyArtistViewHolder).itemMyArtistBinding.myArtistReOrderIV
-        Timber.d("${         reOrderView.isActivated}")
-        Timber.d("${         reOrderView.isInTouchMode}")
-        Timber.d("${         reOrderView.isFocused}")
-        Timber.d("${         reOrderView.isFocusableInTouchMode}")
-
         listener.onItemMove(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
-
-
-
         return true
     }
 

@@ -21,11 +21,7 @@
             android:id="@+id/action_ArtistFragment_to_MyArtistFragment"
             app:destination="@id/MyArtistFragment">
 
-
-
         </action>
-
-
 
 
     </fragment>
@@ -44,7 +40,15 @@
         android:label="@string/my_artist_fragment"
         tools:layout="@layout/fragment_my_artist">
 
+    </fragment>
 
+
+
+    <fragment
+        android:id="@+id/ArtistInfoFragment"
+        android:name="com.example.recommendtrack.presentation.artist.ArtistInfoFragment"
+        android:label="@string/artist_info_fragment"
+        tools:layout="@layout/fragment_artist_info">
 
     </fragment>
 
