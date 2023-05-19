@@ -37,7 +37,7 @@ class ArtistViewModel @Inject constructor(
     val myArtists: LiveData<List<Artist>> = _myArtists
 
     init {
-        getMyArtists()
+        //getMyArtists()
     }
 
     private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
@@ -54,9 +54,9 @@ class ArtistViewModel @Inject constructor(
     }
 
 
-    fun addMyArtist(myArtist: Artist) {
+    fun addMyOneArtist(myArtist: Artist) {
         viewModelScope.launch {
-            addMyArtistUseCase.invoke(myArtist)
+            addMyArtistUseCase.addOneArtist(myArtist)
         }
     }
 
@@ -68,18 +68,32 @@ class ArtistViewModel @Inject constructor(
 
 
     fun getMyArtists() {
+        Timber.d("getMyArtists")
         viewModelScope.launch {
             _myArtists.value = getMyArtistsUseCase.invoke().first()
             Timber.d("${_myArtists.value}")
         }
     }
 
-    fun deleteAllMyArtists() {
+    private suspend fun deleteAllMyArtists() {
+        Timber.d("deleteAllMyArtists")
+        deleteMyArtistUseCase.deleteAllArtists()
+    }
+
+    private suspend fun addMyArtists(myArtists: List<Artist>) {
+
+        Timber.d("addMyArtists")
+        addMyArtistUseCase.addArtists(myArtists)
+    }
+
+
+    fun updateMyArtists(myArtists: List<Artist>) {
         viewModelScope.launch {
-            Timber.d("deleteAllMyArtists")
-            deleteMyArtistUseCase.deleteAllArtists()
+            deleteAllMyArtists()
+            addMyArtists(myArtists)
         }
     }
+
 
 
     override fun onCleared() {

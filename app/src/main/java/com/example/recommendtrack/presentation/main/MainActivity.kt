@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
     }
 
     override fun addMyArtist(myArtist: Artist) {
-        artistViewModel.addMyArtist(myArtist)
+        artistViewModel.addMyOneArtist(myArtist)
     }
 
 

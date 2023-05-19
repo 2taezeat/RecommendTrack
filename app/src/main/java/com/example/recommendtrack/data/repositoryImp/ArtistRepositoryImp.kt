@@ -56,4 +56,8 @@ class ArtistRepositoryImp
         artistDao.deleteAllMyArtists()
     }
 
+    override suspend fun addMyArtists(artists: List<Artist>) {
+        artistDao.addMyArtists(artists)
+    }
+
 }

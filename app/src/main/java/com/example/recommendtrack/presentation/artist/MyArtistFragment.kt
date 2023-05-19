@@ -33,11 +33,11 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("${ artistViewModel }")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        artistViewModel.getMyArtists()
         initView()
 
         artistViewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
@@ -49,9 +49,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     override fun onStop() {
         super.onStop()
         Timber.d("${ myArtistAdapter.currentList }")
-        artistViewModel.deleteAllMyArtists()
-
-
+        artistViewModel.updateMyArtists(myArtistAdapter.currentList)
     }
 
 
