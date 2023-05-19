@@ -51,6 +51,7 @@ class GenreViewModel @Inject constructor(
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
             getAllGenreUseCase.invoke(accessToken).collect { it ->
+                Timber.d("${ it }")
                 _genres.value = it
             }
         }

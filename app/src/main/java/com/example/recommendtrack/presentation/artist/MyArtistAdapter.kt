@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.recommendtrack.databinding.ItemMyArtistBinding
 import com.example.recommendtrack.domain.entity.Artist
 
-class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack) {
+class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack), ItemTouchHelperListener {
 
     companion object {
         private val artistDiffUtilCallBack = object : DiffUtil.ItemCallback<Artist>() {
@@ -29,6 +29,11 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
     override fun onBindViewHolder(holder: MyArtistViewHolder, position: Int) {
         val myArtist = currentList[position]
         holder.bind(artist = myArtist)
+
+    }
+
+    override fun onItemMove(from: Int, to: Int) {
+
 
     }
 }

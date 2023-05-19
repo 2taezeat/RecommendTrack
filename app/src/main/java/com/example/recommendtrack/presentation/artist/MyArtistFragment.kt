@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recommendtrack.R
@@ -19,8 +20,8 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var myArtistRecyclerView: RecyclerView
     private lateinit var myArtistAdapter: MyArtistAdapter
     private val artistViewModel: ArtistViewModel by activityViewModels()
-
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
+    private val itemTouchHelper by lazy { ItemTouchHelper( ItemTouchCallback( requireContext(),listener = myArtistAdapter) ) }
 
 
     override fun onAttach(context: Context) {
@@ -43,6 +44,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
         })
 
     }
+
 
     override fun onDetach() {
         super.onDetach()
@@ -68,6 +70,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
             adapter = myArtistAdapter
         }
 
+        itemTouchHelper.attachToRecyclerView(myArtistRecyclerView)
     }
 
 

@@ -8,7 +8,7 @@ import com.example.recommendtrack.domain.entity.Artist
 import com.google.android.material.snackbar.Snackbar
 
 
-class MyArtistViewHolder(private val itemMyArtistBinding: ItemMyArtistBinding, private val myArtistUpdateCallBack: MyArtistUpdateCallBack?) :
+class MyArtistViewHolder(val itemMyArtistBinding: ItemMyArtistBinding, private val myArtistUpdateCallBack: MyArtistUpdateCallBack?) :
     RecyclerView.ViewHolder(itemMyArtistBinding.root) {
 
     fun bind(artist: Artist) {
