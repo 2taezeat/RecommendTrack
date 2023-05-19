@@ -3,7 +3,6 @@ package com.example.recommendtrack.presentation.artist
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,6 @@ import timber.log.Timber
 class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment_my_artist) {
 
     private lateinit var myArtistRecyclerView: RecyclerView
-    private val args: MyArtistFragmentArgs by navArgs()
     private lateinit var myArtistAdapter: MyArtistAdapter
     private val viewModel: ArtistViewModel by activityViewModels()
 
@@ -24,7 +22,6 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("${ args }")
         Timber.d("${ viewModel }")
     }
 
@@ -42,7 +39,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     private fun initRecyclerView() {
         myArtistAdapter = MyArtistAdapter()
-        myArtistAdapter.submitList(args.myArtistList.toList())
+        myArtistAdapter.submitList(viewModel.myArtists.value)
         myArtistRecyclerView = binding.myArtistRV
         myArtistRecyclerView.apply {
             setHasFixedSize(false)

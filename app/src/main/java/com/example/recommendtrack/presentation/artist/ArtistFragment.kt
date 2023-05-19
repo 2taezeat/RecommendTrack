@@ -86,7 +86,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         }
 
         myArtistNaviButton.setOnClickListener {
-            val action = ArtistFragmentDirections.actionArtistFragmentToMyArtistFragment(myArtistList = viewModel.myArtists.value!!.toTypedArray())
+            val action = ArtistFragmentDirections.actionArtistFragmentToMyArtistFragment()
             findNavController().navigate(action)
         }
 

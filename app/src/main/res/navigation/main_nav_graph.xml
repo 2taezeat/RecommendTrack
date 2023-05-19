@@ -21,10 +21,7 @@
             android:id="@+id/action_ArtistFragment_to_MyArtistFragment"
             app:destination="@id/MyArtistFragment">
 
-            <argument
-                android:name="myArtistList"
-                app:argType="com.example.recommendtrack.domain.entity.Artist[]"
-                />
+
 
         </action>
 
@@ -48,10 +45,6 @@
         tools:layout="@layout/fragment_my_artist">
 
 
-        <argument
-            android:name="myArtistList"
-            app:argType="com.example.recommendtrack.domain.entity.Artist[]"
-            />
 
     </fragment>
 
