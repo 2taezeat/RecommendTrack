@@ -46,4 +46,10 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
     override fun deleteMyArtist(deleteArtist: Artist) {
         artistViewModel.deleteMyArtist(deleteArtist)
     }
+
+    override fun addMyArtist(myArtist: Artist) {
+        artistViewModel.addMyArtist(myArtist)
+    }
+
+
 }

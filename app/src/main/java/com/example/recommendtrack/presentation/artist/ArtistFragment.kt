@@ -1,5 +1,6 @@
 package com.example.recommendtrack.presentation.artist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -27,6 +28,15 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var deleteMyArtistButton: Button
     private lateinit var isMyArtist: ImageView
     private lateinit var myArtistNaviButton: Button
+
+    private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        myArtistUpdateCallBack = context as MyArtistUpdateCallBack?
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +71,13 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        myArtistUpdateCallBack = null
+
+    }
+
+
     private fun initView() {
         initSearchView()
         initButtonView()
@@ -75,14 +92,15 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
         addMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {
-                viewModel.addMyArtist(it)
+                myArtistUpdateCallBack?.addMyArtist(it)
             }
         }
 
         deleteMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {
-                viewModel.deleteMyArtist(it)
+                myArtistUpdateCallBack?.deleteMyArtist(it)
             }
+
         }
 
         myArtistNaviButton.setOnClickListener {
@@ -113,10 +131,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
                     return false
                 }
             })
-
         }
-
-
     }
 
 
