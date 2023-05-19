@@ -7,17 +7,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/my_artist_item_main_cl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/myArtistImageIV"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"
+            >
+
+        </ImageView>
+
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/myArtistNameTV"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/myArtistImageIV"
+            android:layout_marginStart="20dp"
             tools:text="Sample Artist Name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
             >
 
         </TextView>
+
+
+
 
 
 
