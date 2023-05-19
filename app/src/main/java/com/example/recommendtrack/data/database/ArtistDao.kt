@@ -2,7 +2,6 @@ package com.example.recommendtrack.data.database
 
 import androidx.room.*
 import com.example.recommendtrack.domain.entity.Artist
-import com.example.recommendtrack.domain.entity.Genre
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,5 +16,13 @@ interface ArtistDao {
 
     @Delete
     suspend fun deleteMyArtist(artist: Artist)
+
+
+    @Insert
+    suspend fun addMyArtists(artists: List<Artist>)
+
+
+    @Query("DELETE FROM artist")
+    suspend fun deleteAllMyArtists()
 
 }

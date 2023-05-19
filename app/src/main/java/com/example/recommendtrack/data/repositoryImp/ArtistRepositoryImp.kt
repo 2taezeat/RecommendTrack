@@ -51,4 +51,9 @@ class ArtistRepositoryImp
     override suspend fun deleteMyArtist(deletingArtist: Artist) {
         artistDao.deleteMyArtist(deletingArtist)
     }
+
+    override suspend fun deleteAllMyArtists() {
+        artistDao.deleteAllMyArtists()
+    }
+
 }

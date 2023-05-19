@@ -13,4 +13,6 @@ interface ArtistRepository {
 
     suspend fun deleteMyArtist(deletingArtist: Artist)
 
+    suspend fun deleteAllMyArtists()
+
 }

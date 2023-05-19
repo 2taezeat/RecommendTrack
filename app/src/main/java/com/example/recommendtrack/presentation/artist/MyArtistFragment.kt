@@ -22,7 +22,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var myArtistAdapter: MyArtistAdapter
     private val artistViewModel: ArtistViewModel by activityViewModels()
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
-    private val itemTouchHelper by lazy { ItemTouchHelper( ItemTouchCallback( listener = myArtistAdapter) ) }
+    private lateinit var itemTouchHelper : ItemTouchHelper
 
 
     override fun onAttach(context: Context) {
@@ -46,6 +46,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        Timber.d("${ myArtistAdapter.currentList }")
+        artistViewModel.deleteAllMyArtists()
+
+
+    }
+
 
     override fun onDetach() {
         super.onDetach()
@@ -61,8 +69,17 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
 
     private fun initRecyclerView() {
+        Timber.d("initRecyclerView")
+
         myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
-        myArtistAdapter.submitList(artistViewModel.myArtists.value)
+        myArtistAdapter.apply {
+            submitList(artistViewModel.myArtists.value)
+            setOnItemClickListener {
+                val action = MyArtistFragmentDirections.actionMyArtistFragmentToArtistInfoFragment(it)
+                findNavController().navigate(action)
+            }
+        }
+
         myArtistRecyclerView = binding.myArtistRV
         myArtistRecyclerView.apply {
             setHasFixedSize(false)
@@ -71,12 +88,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
             adapter = myArtistAdapter
         }
 
-        myArtistAdapter.setOnItemClickListener {
-            val action = MyArtistFragmentDirections.actionMyArtistFragmentToArtistInfoFragment(it)
-            findNavController().navigate(action)
-
-        }
-
+        itemTouchHelper = ItemTouchHelper(ItemTouchCallback( listener = myArtistAdapter))
         itemTouchHelper.attachToRecyclerView(myArtistRecyclerView)
     }
 

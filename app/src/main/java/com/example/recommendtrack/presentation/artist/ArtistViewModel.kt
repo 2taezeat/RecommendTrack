@@ -62,7 +62,7 @@ class ArtistViewModel @Inject constructor(
 
     fun deleteMyArtist(deleteArtist: Artist) {
         viewModelScope.launch {
-            deleteMyArtistUseCase.invoke(deleteArtist)
+            deleteMyArtistUseCase.deleteOneArtist(deleteArtist)
         }
     }
 
@@ -74,7 +74,12 @@ class ArtistViewModel @Inject constructor(
         }
     }
 
-
+    fun deleteAllMyArtists() {
+        viewModelScope.launch {
+            Timber.d("deleteAllMyArtists")
+            deleteMyArtistUseCase.deleteAllArtists()
+        }
+    }
 
 
     override fun onCleared() {
