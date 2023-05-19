@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.recommendtrack.databinding.ItemMyArtistBinding
 import com.example.recommendtrack.domain.entity.Artist
 
-class MyArtistAdapter: ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack) {
+class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack) {
 
     companion object {
         private val artistDiffUtilCallBack = object : DiffUtil.ItemCallback<Artist>() {
@@ -22,7 +22,7 @@ class MyArtistAdapter: ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCal
      }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyArtistViewHolder {
-        return MyArtistViewHolder(ItemMyArtistBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MyArtistViewHolder(ItemMyArtistBinding.inflate(LayoutInflater.from(parent.context), parent, false), myArtistUpdateCallBack)
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.recommendtrack.presentation.artist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -18,7 +19,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var myArtistAdapter: MyArtistAdapter
     private val viewModel: ArtistViewModel by activityViewModels()
 
+    private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        myArtistUpdateCallBack = context as MyArtistUpdateCallBack?
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +38,12 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
         initView()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        myArtistUpdateCallBack = null
+
+    }
+
 
 
     private fun initView() {
@@ -38,7 +52,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
 
     private fun initRecyclerView() {
-        myArtistAdapter = MyArtistAdapter()
+        myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
         myArtistAdapter.submitList(viewModel.myArtists.value)
         myArtistRecyclerView = binding.myArtistRV
         myArtistRecyclerView.apply {
@@ -50,9 +64,6 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     }
 
-//    override fun deleteMyArtist(deleteArtist: Artist) {
-//        TODO("Not yet implemented")
-//    }
 
 
 }

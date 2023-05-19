@@ -8,12 +8,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.ActivityMainBinding
+import com.example.recommendtrack.domain.entity.Artist
 import com.example.recommendtrack.presentation.artist.ArtistViewModel
+import com.example.recommendtrack.presentation.artist.MyArtistUpdateCallBack
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel : MainViewModel by viewModels()
@@ -41,5 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+    override fun deleteMyArtist(deleteArtist: Artist) {
+        artistViewModel.deleteMyArtist(deleteArtist)
+    }
 }
