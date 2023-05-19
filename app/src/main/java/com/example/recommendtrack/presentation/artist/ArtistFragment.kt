@@ -64,9 +64,6 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
         })
 
-        viewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
-
-        })
 
 
     }
@@ -93,12 +90,14 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         addMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {
                 myArtistUpdateCallBack?.addMyArtist(it)
+                myArtistUpdateCallBack?.getMyArtist()
             }
         }
 
         deleteMyArtistButton.setOnClickListener {
             viewModel.searchArtist.value?.let {
                 myArtistUpdateCallBack?.deleteMyArtist(it)
+                myArtistUpdateCallBack?.getMyArtist()
             }
 
         }

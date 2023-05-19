@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
     private val artistViewModel : ArtistViewModel by viewModels()
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -51,5 +49,9 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
         artistViewModel.addMyArtist(myArtist)
     }
 
+
+    override fun getMyArtist() {
+        artistViewModel.getMyArtists()
+    }
 
 }

@@ -8,5 +8,6 @@ interface MyArtistUpdateCallBack {
 
     fun addMyArtist(myArtist: Artist)
 
+    fun getMyArtist()
 
 }

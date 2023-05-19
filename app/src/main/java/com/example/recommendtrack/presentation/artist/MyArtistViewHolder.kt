@@ -25,6 +25,7 @@ class MyArtistViewHolder(private val itemMyArtistBinding: ItemMyArtistBinding, p
             itemMyArtistBinding.myArtistFavoriteIV.setOnClickListener {
                 myArtistUpdateCallBack?.deleteMyArtist(deleteArtist = artist)
                 Snackbar.make(it, "Item $layoutPosition touched!", Snackbar.LENGTH_LONG).show()
+                myArtistUpdateCallBack?.getMyArtist()
             }
 
         }
