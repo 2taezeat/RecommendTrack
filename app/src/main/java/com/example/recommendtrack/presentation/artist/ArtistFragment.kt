@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
@@ -24,9 +24,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
     private lateinit var artistFollowersTextView: TextView
     private lateinit var artistPopularityTextView: TextView
     private lateinit var artistGenresTextView: TextView
-    private lateinit var addMyArtistButton: Button
-    private lateinit var deleteMyArtistButton: Button
-    private lateinit var isMyArtist: ImageView
+    private lateinit var artistIsMyCheckBox: CheckBox
     private lateinit var myArtistNaviButton: Button
 
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
@@ -56,15 +54,8 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
 
-            if (viewModel.myArtists.value!!.contains(it)) {
-                isMyArtist.setImageResource(R.drawable.baseline_favorite_24)
-            } else {
-                isMyArtist.setImageResource(R.drawable.baseline_favorite_border_24)
-            }
-
+            artistIsMyCheckBox.isChecked = viewModel.myArtists.value!!.contains(it)
         })
-
-
 
     }
 
@@ -77,35 +68,37 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
     private fun initView() {
         initSearchView()
-        initButtonView()
+        initClickAbleView()
         initContentTextView()
+
     }
 
-    private fun initButtonView() {
-        addMyArtistButton = binding.artistAddButton
-        deleteMyArtistButton = binding.artistDeleteButton
-        isMyArtist = binding.artistIsMyIV
+    private fun initClickAbleView() {
+        artistIsMyCheckBox = binding.artistIsMyCheckBox
         myArtistNaviButton = binding.myArtistNaviButton
 
-        addMyArtistButton.setOnClickListener {
-            viewModel.searchArtist.value?.let {
-                myArtistUpdateCallBack?.addMyArtist(it)
-                myArtistUpdateCallBack?.getMyArtist()
-            }
-        }
 
-        deleteMyArtistButton.setOnClickListener {
-            viewModel.searchArtist.value?.let {
-                myArtistUpdateCallBack?.deleteMyArtist(it)
-                myArtistUpdateCallBack?.getMyArtist()
-            }
-
-        }
 
         myArtistNaviButton.setOnClickListener {
             val action = ArtistFragmentDirections.actionArtistFragmentToMyArtistFragment()
             findNavController().navigate(action)
         }
+
+
+        artistIsMyCheckBox.setOnClickListener { it ->
+            if (artistIsMyCheckBox.isChecked) {
+                viewModel.searchArtist.value?.let {
+                    myArtistUpdateCallBack?.addMyArtist(it)
+                    myArtistUpdateCallBack?.getMyArtist()
+                }
+            } else {
+                viewModel.searchArtist.value?.let {
+                    myArtistUpdateCallBack?.deleteMyArtist(it)
+                    myArtistUpdateCallBack?.getMyArtist()
+                }
+            }
+        }
+
 
     }
 
