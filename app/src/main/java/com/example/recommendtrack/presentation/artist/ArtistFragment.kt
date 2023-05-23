@@ -57,7 +57,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
 
-            artistIsMyCheckBox.isChecked = artistViewModel.myArtists.value!!.contains(it)
+            artistIsMyCheckBox.isChecked = artistViewModel.myArtists.value!!.any { myArtists -> myArtists.name == it.name }
         })
 
     }
@@ -123,6 +123,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(searchString: String): Boolean {
                     artistViewModel.searchArtist(searchString)
+                    clearFocus()
                     return true
                 }
 
