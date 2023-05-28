@@ -5,9 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recommendtrack.BuildConfig
 import com.example.recommendtrack.domain.usecase.GetTokenUseCase
-import com.example.recommendtrack.utils.Constants.SPOTIFY_CLIENT_ID
-import com.example.recommendtrack.utils.Constants.SPOTIFY_CLIENT_SECRET
 import com.example.recommendtrack.utils.Constants.SPOTIFY_GRANT_TYPE
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,8 +45,8 @@ class MainViewModel @Inject constructor(
             if (tokenString.isEmpty()) {
                 val tokenRemoteFlow = getTokenUseCase.invoke(
                     SPOTIFY_GRANT_TYPE,
-                    SPOTIFY_CLIENT_ID,
-                    SPOTIFY_CLIENT_SECRET
+                    BuildConfig.SPOTIFY_CLIENT_ID,
+                    BuildConfig.SPOTIFY_CLIENT_SECRET
                 )
                 tokenRemoteFlow.collect { token ->
                     writeTokenDataStore(token.accessToken)

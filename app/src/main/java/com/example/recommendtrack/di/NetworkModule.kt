@@ -1,10 +1,9 @@
 package com.example.recommendtrack.di
 
+import com.example.recommendtrack.BuildConfig
 import com.example.recommendtrack.data.remote.ArtistApi
 import com.example.recommendtrack.data.remote.GenreApi
 import com.example.recommendtrack.data.remote.TokenApi
-import com.example.recommendtrack.utils.Constants.BASE_URL
-import com.example.recommendtrack.utils.Constants.SPOTIFY_ACCOUNT_URL
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -67,7 +66,7 @@ object NetworkModule {
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .build()
     }
 
@@ -80,7 +79,7 @@ object NetworkModule {
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
-            .baseUrl(SPOTIFY_ACCOUNT_URL)
+            .baseUrl(BuildConfig.SPOTIFY_ACCOUNT_URL)
             .build()
     }
 
