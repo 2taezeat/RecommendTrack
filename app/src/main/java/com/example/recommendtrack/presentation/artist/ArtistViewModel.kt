@@ -88,9 +88,11 @@ class ArtistViewModel @Inject constructor(
 
 
     fun updateMyArtists(myArtists: List<Artist>) {
+        Timber.d("${myArtists }")
         viewModelScope.launch {
             deleteAllMyArtists()
             addMyArtists(myArtists)
+            getMyArtists()
         }
     }
 

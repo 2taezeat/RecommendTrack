@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.recommendtrack.databinding.ItemMyArtistBinding
 import com.example.recommendtrack.domain.entity.Artist
+import timber.log.Timber
 import java.util.Collections
 
 class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack), ItemTouchHelperListener {
@@ -50,6 +51,7 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
     override fun onItemMove(from: Int, to: Int) {
         val newList = currentList.toMutableList()
         Collections.swap(newList, from, to)
+        Timber.d("${ from}, ${to}")
         submitList(newList)
     }
 
