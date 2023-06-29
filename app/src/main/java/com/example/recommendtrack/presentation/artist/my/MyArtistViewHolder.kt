@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.artist
+package com.example.recommendtrack.presentation.artist.my
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/myArtistMainCL"
-        tools:context=".presentation.artist.MyArtistFragment"
+        tools:context=".presentation.artist.my.MyArtistFragment"
         >
 
         <androidx.recyclerview.widget.RecyclerView

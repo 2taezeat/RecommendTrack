@@ -10,7 +10,7 @@ import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.ActivityMainBinding
 import com.example.recommendtrack.domain.entity.Artist
 import com.example.recommendtrack.presentation.artist.ArtistViewModel
-import com.example.recommendtrack.presentation.artist.MyArtistUpdateCallBack
+import com.example.recommendtrack.presentation.artist.my.MyArtistUpdateCallBack
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.artist
+package com.example.recommendtrack.presentation.artist.my
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import com.example.recommendtrack.domain.entity.Artist
 import timber.log.Timber
 import java.util.Collections
 
-class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(artistDiffUtilCallBack), ItemTouchHelperListener {
+class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack?): ListAdapter<Artist, MyArtistViewHolder>(
+    artistDiffUtilCallBack
+), ItemTouchHelperListener {
 
 
 

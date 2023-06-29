@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.artist
+package com.example.recommendtrack.presentation.artist.my
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentMyArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
+import com.example.recommendtrack.presentation.artist.ArtistViewModel
 import timber.log.Timber
 
 

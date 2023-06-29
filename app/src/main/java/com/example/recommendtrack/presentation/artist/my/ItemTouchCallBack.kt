@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.artist
+package com.example.recommendtrack.presentation.artist.my
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -29,7 +29,7 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouc
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
-        viewHolder?.itemView?.alpha = 1.0f
+        viewHolder.itemView.alpha = 1.0f
 
     }
 

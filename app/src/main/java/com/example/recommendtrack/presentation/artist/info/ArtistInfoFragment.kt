@@ -1,4 +1,4 @@
-package com.example.recommendtrack.presentation.artist
+package com.example.recommendtrack.presentation.artist.info
 
 import android.os.Bundle
 import android.view.View

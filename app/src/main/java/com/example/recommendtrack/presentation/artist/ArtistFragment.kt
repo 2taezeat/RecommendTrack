@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
+import com.example.recommendtrack.presentation.artist.my.MyArtistUpdateCallBack
 import com.example.recommendtrack.presentation.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
