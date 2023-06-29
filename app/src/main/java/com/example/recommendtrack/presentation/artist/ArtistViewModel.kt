@@ -4,13 +4,14 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Artist
+import com.example.recommendtrack.domain.usecase.GetTokenUseCase
 import com.example.recommendtrack.domain.usecase.artist.AddMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.DeleteMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.GetMyArtistsUseCase
 import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
+import com.example.recommendtrack.presentation.main.TokenViewModel
 import com.example.recommendtrack.utils.PreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -23,12 +24,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtistViewModel @Inject constructor(
+    private val getTokenUseCase: GetTokenUseCase,
     private val searchArtistUseCase: SearchArtistUseCase,
     private val getMyArtistsUseCase: GetMyArtistsUseCase,
     private val addMyArtistUseCase: AddMyArtistUseCase,
     private val deleteMyArtistUseCase: DeleteMyArtistUseCase,
     private val dataStore: DataStore<Preferences>
-) : ViewModel() {
+) : TokenViewModel(getTokenUseCase, dataStore) {
 
     private val _searchArtist = MutableLiveData<Artist>()
     val searchArtist: LiveData<Artist> = _searchArtist

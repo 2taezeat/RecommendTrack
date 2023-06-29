@@ -14,14 +14,12 @@ import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
 import com.example.recommendtrack.presentation.BaseFragment
 import com.example.recommendtrack.presentation.artist.my.MyArtistUpdateCallBack
-import com.example.recommendtrack.presentation.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
     private val artistViewModel: ArtistViewModel by activityViewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView
@@ -83,7 +81,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
         refreshTokenButton = binding.artistRefreshTokenButton
         refreshTokenButton.setOnClickListener {
-            mainViewModel.refreshToken()
+            artistViewModel.refreshToken()
         }
 
 

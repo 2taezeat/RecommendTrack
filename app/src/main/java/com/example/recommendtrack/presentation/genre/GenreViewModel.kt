@@ -4,13 +4,14 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Genre
+import com.example.recommendtrack.domain.usecase.GetTokenUseCase
 import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
+import com.example.recommendtrack.presentation.main.TokenViewModel
 import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -22,12 +23,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GenreViewModel @Inject constructor(
+    private val getTokenUseCase: GetTokenUseCase,
     private val getAllGenreUseCase: GetAllGenreUseCase,
     private val addMyGenresUseCase: AddMyGenresUseCase,
     private val getMyGenresUseCase: GetMyGenresUseCase,
     private val deleteMyGenresUseCase: DeleteMyGenresUseCase,
     private val dataStore: DataStore<Preferences>
-) : ViewModel() {
+) : TokenViewModel(getTokenUseCase, dataStore) {
 
     private val _genres = MutableLiveData<List<Genre>>()
     val genres: LiveData<List<Genre>> = _genres
@@ -50,9 +52,11 @@ class GenreViewModel @Inject constructor(
     fun getAllGenres() {
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            getAllGenreUseCase.invoke(accessToken).collect { it ->
-                Timber.d("${ it }")
-                _genres.value = it
+            _genres.value = getAllGenreUseCase.invoke(accessToken).first().also {
+                Timber.d("${it}")
+                if (it.isEmpty()) {
+                    refreshToken()
+                }
             }
         }
     }
@@ -76,7 +80,6 @@ class GenreViewModel @Inject constructor(
             _myGenres.value = getMyGenresUseCase.invoke().first()
         }
     }
-
 
 
     override fun onCleared() {
