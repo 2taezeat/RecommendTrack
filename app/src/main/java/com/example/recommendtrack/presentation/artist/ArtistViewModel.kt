@@ -12,11 +12,8 @@ import com.example.recommendtrack.domain.usecase.artist.DeleteMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.GetMyArtistsUseCase
 import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
-import com.example.recommendtrack.utils.PreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -42,9 +39,7 @@ class ArtistViewModel @Inject constructor(
         //getMyArtists()
     }
 
-    private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
-        preferences[PreferenceKey.tokenPreferenceKey] ?: ""
-    }
+
 
     fun searchArtist(artistName: String) {
         viewModelScope.launch {

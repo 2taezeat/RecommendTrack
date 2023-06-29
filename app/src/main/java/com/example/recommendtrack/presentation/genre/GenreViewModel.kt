@@ -12,11 +12,8 @@ import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
-import com.example.recommendtrack.utils.PreferenceKey.tokenPreferenceKey
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -43,23 +40,20 @@ class GenreViewModel @Inject constructor(
         getMyGenres()
     }
 
-
-    private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
-        preferences[tokenPreferenceKey] ?: ""
-    }
-
-
-    fun getAllGenres() {
+    private fun getAllGenres() {
+        Timber.d("getAllGenres_call")
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
             _genres.value = getAllGenreUseCase.invoke(accessToken).first().also {
-                Timber.d("${it}")
                 if (it.isEmpty()) {
                     refreshToken()
                 }
             }
         }
     }
+
+
+
 
 
     fun addMyGenres(myGenres: List<Genre>) {

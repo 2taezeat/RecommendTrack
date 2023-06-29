@@ -3,6 +3,8 @@ package com.example.recommendtrack.presentation.main
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.BuildConfig
@@ -16,12 +18,17 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
-abstract class TokenViewModel (
+abstract class TokenViewModel(
     private val getTokenUseCase: GetTokenUseCase,
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
-    private fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
+    private val _refreshToken = MutableLiveData<String>()
+    val refreshToken: LiveData<String> = _refreshToken
+
+
+
+    fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->
         preferences[PreferenceKey.tokenPreferenceKey] ?: ""
     }
 
@@ -44,11 +51,13 @@ abstract class TokenViewModel (
                     writeTokenDataStore(token.accessToken)
                 }
             }
+            _refreshToken.value = tokenString
         }
     }
 
 
     fun refreshToken() {
+        Timber.d("refreshToken_Call")
         viewModelScope.launch {
             removeToken()
             getToken()
@@ -56,8 +65,8 @@ abstract class TokenViewModel (
     }
 
     private suspend fun removeToken() {
-        writeTokenDataStore("")
         Timber.d("removeToken")
+        writeTokenDataStore("")
     }
 
 

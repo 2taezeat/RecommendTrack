@@ -1,6 +1,5 @@
 package com.example.recommendtrack.data.repositoryImp
 
-import android.util.Log
 import com.example.recommendtrack.data.database.GenreDao
 import com.example.recommendtrack.data.datasource.GenreRemoteDataSource
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
@@ -31,9 +30,11 @@ class GenreRepositoryImp
                 Timber.tag("success").d( "$genres")
             }.suspendOnFailure {
                 Timber.tag("fail").d( "${this.message()}")
+                emit(emptyList<Genre>())
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")
+                emit(emptyList<Genre>())
             }
         }.flowOn(ioDispatcher)
 

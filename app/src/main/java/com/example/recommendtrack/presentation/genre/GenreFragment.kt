@@ -39,6 +39,10 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             initGenreChipView(it)
         })
 
+        viewModel.refreshToken.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(view, R.string.refresh_token_message, Snackbar.LENGTH_LONG).show()
+        })
+
         initGenreSaveView()
 
     }
