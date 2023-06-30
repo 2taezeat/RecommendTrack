@@ -26,6 +26,12 @@ abstract class TokenViewModel(
     private val _refreshToken = MutableLiveData<String>()
     val refreshToken: LiveData<String> = _refreshToken
 
+    var errorMessage : String = ""
+        set(value) {
+            refreshToken()
+            field = value
+        }
+
 
 
     fun tokenFlowFromDataStore(): Flow<String> = dataStore.data.map { preferences ->

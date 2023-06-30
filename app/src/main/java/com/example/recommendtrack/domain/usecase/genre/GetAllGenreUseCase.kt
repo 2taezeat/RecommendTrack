@@ -5,7 +5,7 @@ import com.example.recommendtrack.domain.repository.GenreRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetAllGenreUseCase(private val genreRepository: GenreRepository) {
-    suspend fun invoke(accessToken: String): Flow<List<Genre>> {
-        return genreRepository.fetchGenres(accessToken)
+    suspend fun invoke(accessToken: String, onError: (String) -> Unit): Flow<List<Genre>> {
+        return genreRepository.fetchGenres(accessToken, onError)
     }
 }

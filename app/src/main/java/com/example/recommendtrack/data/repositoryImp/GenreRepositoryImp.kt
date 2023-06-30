@@ -20,7 +20,7 @@ import javax.inject.Inject
 class GenreRepositoryImp
 @Inject constructor(private val dataSource: GenreRemoteDataSource, private val ioDispatcher: CoroutineDispatcher, private val genreDao: GenreDao) : GenreRepository {
 
-    override suspend fun fetchGenres(accessToken: String): Flow<List<Genre>> {
+    override suspend fun fetchGenres(accessToken: String, onError: (String) -> Unit): Flow<List<Genre>> {
         val response = dataSource.fetchGenres(accessToken)
 
         val flowGenres = flow {
@@ -29,12 +29,11 @@ class GenreRepositoryImp
                 emit(genres)
                 Timber.tag("success").d( "$genres")
             }.suspendOnFailure {
-                Timber.tag("fail").d( "${this.message()}")
-                emit(emptyList<Genre>())
+                //Timber.tag("fail").d( "${this.message()}")
+                onError( this.message() )
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")
-                emit(emptyList<Genre>())
             }
         }.flowOn(ioDispatcher)
 

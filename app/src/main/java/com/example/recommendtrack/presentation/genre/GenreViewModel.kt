@@ -35,6 +35,7 @@ class GenreViewModel @Inject constructor(
     val myGenres: LiveData<List<Genre>> = _myGenres
 
 
+
     init {
         getAllGenres()
         getMyGenres()
@@ -44,16 +45,11 @@ class GenreViewModel @Inject constructor(
         Timber.d("getAllGenres_call")
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            _genres.value = getAllGenreUseCase.invoke(accessToken).first().also {
-                if (it.isEmpty()) {
-                    refreshToken()
-                }
+            getAllGenreUseCase.invoke(accessToken, onError = { errorMessage = it }).collect {
+                _genres.value = it
             }
         }
     }
-
-
-
 
 
     fun addMyGenres(myGenres: List<Genre>) {
