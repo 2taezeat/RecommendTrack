@@ -12,6 +12,15 @@
         android:label="@string/recommend_track_fragment"
         tools:layout="@layout/fragment_recommend_track" />
 
+
+    <fragment
+        android:id="@+id/SongFragment"
+        android:name="com.example.recommendtrack.presentation.song.SongFragment"
+        android:label="@string/song_fragment"
+        tools:layout="@layout/fragment_song" />
+
+
+
     <fragment
         android:id="@+id/ArtistFragment"
         android:name="com.example.recommendtrack.presentation.artist.ArtistFragment"
@@ -76,6 +85,9 @@
         </argument>
 
     </fragment>
+
+
+
 
 
 </navigation>

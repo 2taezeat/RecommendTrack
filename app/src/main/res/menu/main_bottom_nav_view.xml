@@ -8,6 +8,12 @@
         android:title="@string/recommend_track_menu"
         />
 
+    <item
+        android:id="@+id/SongFragment"
+        android:enabled="true"
+        android:title="@string/song_menu"
+        />
+
 
     <item
         android:id="@+id/ArtistFragment"
