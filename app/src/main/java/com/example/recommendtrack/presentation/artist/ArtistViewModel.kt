@@ -44,7 +44,7 @@ class ArtistViewModel @Inject constructor(
     fun searchArtist(artistName: String) {
         viewModelScope.launch {
             val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            searchArtistUseCase.invoke(accessToken, "artist:${artistName}").collect { it ->
+            searchArtistUseCase.invoke(accessToken, "artist:${artistName}", onError = { errorMessage = it }).collect { it ->
                 _searchArtist.value = it
             }
         }

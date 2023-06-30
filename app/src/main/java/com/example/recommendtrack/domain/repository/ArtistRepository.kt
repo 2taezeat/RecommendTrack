@@ -4,7 +4,7 @@ import com.example.recommendtrack.domain.entity.Artist
 import kotlinx.coroutines.flow.Flow
 
 interface ArtistRepository {
-    suspend fun searchArtist(accessToken: String, artistName: String): Flow<Artist>
+    suspend fun searchArtist(accessToken: String, artistName: String, onError: (String) -> Unit): Flow<Artist>
 
 
     suspend fun fetchMyArtists(): Flow<List<Artist>>

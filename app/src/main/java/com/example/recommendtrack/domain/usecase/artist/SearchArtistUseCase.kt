@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 
 class SearchArtistUseCase(private val artistRepository: ArtistRepository) {
-    suspend fun invoke(accessToken: String, artistName: String): Flow<Artist> {
-        return artistRepository.searchArtist(accessToken, artistName)
+    suspend fun invoke(accessToken: String, artistName: String, onError: (String) -> Unit ): Flow<Artist> {
+        return artistRepository.searchArtist(accessToken, artistName, onError)
 
     }
 }

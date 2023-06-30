@@ -20,7 +20,7 @@ import javax.inject.Inject
 class ArtistRepositoryImp
 @Inject constructor(private val dataSource: ArtistRemoteDataSource, private val ioDispatcher: CoroutineDispatcher, private val artistDao: ArtistDao) : ArtistRepository {
 
-    override suspend fun searchArtist(accessToken: String, artistName: String): Flow<Artist> {
+    override suspend fun searchArtist(accessToken: String, artistName: String, onError: (String) -> Unit): Flow<Artist> {
         val response = dataSource.searchArtist(accessToken, artistName)
 
         val flowArtist = flow {
@@ -29,7 +29,8 @@ class ArtistRepositoryImp
                 emit(artist)
                 Timber.tag("success").d("$artist")
             }.suspendOnFailure {
-                Timber.tag("fail").d("${this.message()}")
+                //Timber.tag("fail").d("${this.message()}")
+                onError( this.message() )
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")
