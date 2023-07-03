@@ -1,4 +1,4 @@
-package com.example.recommendtrack.data.dto.artistSearch
+package com.example.recommendtrack.data.dto.searchDto.artistSearch
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,7 +7,7 @@ data class Artists(
     @SerializedName("href")
     val href: String,
     @SerializedName("items")
-    val items: List<Item>,
+    val items: List<ItemInArtist>,
     @SerializedName("limit")
     val limit: Int,
     @SerializedName("next")

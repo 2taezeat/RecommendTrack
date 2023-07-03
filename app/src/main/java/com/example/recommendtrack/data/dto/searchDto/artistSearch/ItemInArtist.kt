@@ -1,9 +1,11 @@
-package com.example.recommendtrack.data.dto.artistSearch
+package com.example.recommendtrack.data.dto.searchDto.artistSearch
 
+import com.example.recommendtrack.data.dto.searchDto.ExternalUrls
+import com.example.recommendtrack.data.dto.searchDto.Image
 import com.google.gson.annotations.SerializedName
 
 
-data class Item(
+data class ItemInArtist(
     @SerializedName("external_urls")
     val externalUrls: ExternalUrls,
     @SerializedName("followers")

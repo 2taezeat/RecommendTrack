@@ -1,6 +1,6 @@
 package com.example.recommendtrack.data.dto
 
-import com.example.recommendtrack.data.dto.artistSearch.Artists
+import com.example.recommendtrack.data.dto.searchDto.artistSearch.Artists
 import com.google.gson.annotations.SerializedName
 
 
