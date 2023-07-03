@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Genre
-import com.example.recommendtrack.domain.usecase.GetTokenUseCase
 import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first

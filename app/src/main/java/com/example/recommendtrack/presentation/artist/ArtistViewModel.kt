@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.domain.entity.Artist
-import com.example.recommendtrack.domain.usecase.GetTokenUseCase
 import com.example.recommendtrack.domain.usecase.artist.AddMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.DeleteMyArtistUseCase
 import com.example.recommendtrack.domain.usecase.artist.GetMyArtistsUseCase
 import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
+import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first

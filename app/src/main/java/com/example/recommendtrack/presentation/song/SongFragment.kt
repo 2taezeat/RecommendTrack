@@ -26,12 +26,11 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
 
     companion object {
-        fun newInstance() =
-            SongFragment().apply {
-                arguments = Bundle().apply {
+        fun newInstance() = SongFragment().apply {
+            arguments = Bundle().apply {
 
-                }
             }
+        }
     }
 }
 

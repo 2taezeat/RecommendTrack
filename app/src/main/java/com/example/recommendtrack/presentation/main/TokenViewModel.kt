@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.BuildConfig
-import com.example.recommendtrack.domain.usecase.GetTokenUseCase
+import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.utils.Constants
 import com.example.recommendtrack.utils.PreferenceKey
 import kotlinx.coroutines.flow.Flow
