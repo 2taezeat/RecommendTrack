@@ -78,8 +78,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
             }
         }
 
-        myArtistRecyclerView = binding.myArtistRV
-        myArtistRecyclerView.apply {
+        myArtistRecyclerView = binding.myArtistRV.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))

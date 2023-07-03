@@ -12,6 +12,7 @@ import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
+import com.example.recommendtrack.utils.Constants.TOKEN_TYPE_BEARER
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -44,7 +45,7 @@ class GenreViewModel @Inject constructor(
     private fun getAllGenres() {
         Timber.d("getAllGenres_call")
         viewModelScope.launch {
-            val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
+            val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"
             getAllGenreUseCase.invoke(accessToken, onError = { errorMessage = it }).collect {
                 _genres.value = it
             }

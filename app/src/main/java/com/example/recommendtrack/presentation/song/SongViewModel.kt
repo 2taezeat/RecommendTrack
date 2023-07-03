@@ -30,14 +30,14 @@ class SongViewModel @Inject constructor(
 
 
     init {
-        searchSong("uprising")
+        //searchSong("uprising")
     }
 
 
     fun searchSong(songName: String) {
         viewModelScope.launch {
-            val accessToken = "$TOKEN_TYPE_BEARER} ${tokenFlowFromDataStore().first()}"
-            searchSongUseCase.invoke(accessToken, "${TRACK_STRING_VALUE}:${songName}", onError = { errorMessage = it }, 1, 0).collect { it ->
+            val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"
+            searchSongUseCase.invoke(accessToken, "${TRACK_STRING_VALUE}:${songName}", onError = { errorMessage = it }, 10, 5).collect { it ->
                 _searchedSongs.value = it
             }
         }

@@ -5,6 +5,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentSongBinding
@@ -17,11 +20,13 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
-    private val viewModel by viewModels<SongViewModel>()
+    private val songViewModel by viewModels<SongViewModel>()
 
     private lateinit var songSearchView: SearchView
     private lateinit var songSearchBar: SearchBar
     private lateinit var songSearchRecyclerView: RecyclerView
+    private lateinit var searchSongAdapter: SearchSongAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +36,14 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("${viewModel}")
+        Timber.d("${songViewModel}")
 
         initSearchView()
         initRecyclerView()
 
+        songViewModel.searchedSongs.observe(viewLifecycleOwner, Observer { it ->
+            searchSongAdapter.submitList(it)
+        })
     }
 
 
@@ -51,6 +59,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
             override fun onTextChanged(searchString: CharSequence, p1: Int, p2: Int, p3: Int) {
                 if (searchString.length >= 3) {
                     Timber.d("${searchString}")
+                    songViewModel.searchSong(searchString.toString())
 
                 }
             }
@@ -60,7 +69,17 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
     }
 
     private fun initRecyclerView() {
-        songSearchRecyclerView = binding.searchSongRV
+        searchSongAdapter = SearchSongAdapter()
+
+
+        songSearchRecyclerView = binding.searchSongRV.apply {
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            adapter = searchSongAdapter
+
+        }
+
 
 
     }

@@ -8,7 +8,7 @@ import com.skydoves.sandwich.ApiSuccessModelMapper
 object SongMapper : ApiSuccessModelMapper<SongDto, List<Song>> {
     override fun map(apiSuccessResponse: ApiResponse.Success<SongDto>): List<Song> {
         val items = apiSuccessResponse.data.tracks.items
-        return items.map { Song(name = it.name, artists = it.artists, preview_url = it.preview_url) }
+        return items.map { Song(name = it.name, artists = it.artists, preview_url = it.preview_url, album = it.album, id = it.id)  }
     }
 
 }
