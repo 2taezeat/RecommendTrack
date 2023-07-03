@@ -9,6 +9,8 @@ import com.example.recommendtrack.domain.entity.Song
 import com.example.recommendtrack.domain.usecase.song.SearchSongUseCase
 import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
+import com.example.recommendtrack.utils.Constants.TOKEN_TYPE_BEARER
+import com.example.recommendtrack.utils.Constants.TRACK_STRING_VALUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -28,14 +30,14 @@ class SongViewModel @Inject constructor(
 
 
     init {
-
+        searchSong("uprising")
     }
 
 
     fun searchSong(songName: String) {
         viewModelScope.launch {
-            val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            searchSongUseCase.invoke(accessToken, "track:${songName}", onError = { errorMessage = it }, 1, 0).collect { it ->
+            val accessToken = "$TOKEN_TYPE_BEARER} ${tokenFlowFromDataStore().first()}"
+            searchSongUseCase.invoke(accessToken, "${TRACK_STRING_VALUE}:${songName}", onError = { errorMessage = it }, 1, 0).collect { it ->
                 _searchedSongs.value = it
             }
         }

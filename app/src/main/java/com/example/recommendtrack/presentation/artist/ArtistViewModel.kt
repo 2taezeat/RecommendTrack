@@ -12,6 +12,8 @@ import com.example.recommendtrack.domain.usecase.artist.GetMyArtistsUseCase
 import com.example.recommendtrack.domain.usecase.artist.SearchArtistUseCase
 import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.presentation.main.TokenViewModel
+import com.example.recommendtrack.utils.Constants.ARTIST_STRING_VALUE
+import com.example.recommendtrack.utils.Constants.TOKEN_TYPE_BEARER
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -43,8 +45,8 @@ class ArtistViewModel @Inject constructor(
 
     fun searchArtist(artistName: String) {
         viewModelScope.launch {
-            val accessToken = "Bearer ${tokenFlowFromDataStore().first()}"
-            searchArtistUseCase.invoke(accessToken, "artist:${artistName}", onError = { errorMessage = it }).collect { it ->
+            val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"
+            searchArtistUseCase.invoke(accessToken, "${ARTIST_STRING_VALUE}:${artistName}", onError = { errorMessage = it }).collect { it ->
                 _searchArtist.value = it
             }
         }

@@ -2,6 +2,7 @@ package com.example.recommendtrack.di
 
 import com.example.recommendtrack.domain.repository.ArtistRepository
 import com.example.recommendtrack.domain.repository.GenreRepository
+import com.example.recommendtrack.domain.repository.SongRepository
 import com.example.recommendtrack.domain.repository.TokenRepository
 import com.example.recommendtrack.domain.usecase.*
 import com.example.recommendtrack.domain.usecase.artist.AddMyArtistUseCase
@@ -12,6 +13,7 @@ import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.song.SearchSongUseCase
 import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import dagger.Module
 import dagger.Provides
@@ -72,5 +74,10 @@ object UseCaseModule {
         return DeleteMyArtistUseCase(repository)
     }
 
+
+    @Provides
+    fun provideSearchSongUseCase(repository: SongRepository): SearchSongUseCase {
+        return SearchSongUseCase(repository)
+    }
 
 }
