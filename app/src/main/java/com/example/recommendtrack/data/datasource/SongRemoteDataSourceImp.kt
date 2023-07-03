@@ -1,0 +1,20 @@
+package com.example.recommendtrack.data.datasource
+
+import com.example.recommendtrack.data.dto.SongDto
+import com.example.recommendtrack.data.remote.SongApi
+import com.skydoves.sandwich.ApiResponse
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class SongRemoteDataSourceImp @Inject constructor(private val songApi: SongApi) :
+    SongRemoteDataSource {
+
+    override suspend fun searchSong(
+        accessToken: String, songName: String, limit: Int, offset: Int
+    ): ApiResponse<SongDto> {
+        return songApi.getSong(accessToken = accessToken, songName = songName, limit = limit, offset = offset)
+    }
+
+
+}

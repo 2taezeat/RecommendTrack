@@ -23,7 +23,7 @@ class GenreRepositoryImp
     override suspend fun fetchGenres(accessToken: String, onError: (String) -> Unit): Flow<List<Genre>> {
         val response = dataSource.fetchGenres(accessToken)
 
-        val flowGenres = flow {
+        val genresFlow = flow {
             response.suspendOnSuccess(GenreMapper) {
                 val genres = this
                 emit(genres)
@@ -37,7 +37,7 @@ class GenreRepositoryImp
             }
         }.flowOn(ioDispatcher)
 
-        return flowGenres
+        return genresFlow
     }
 
 

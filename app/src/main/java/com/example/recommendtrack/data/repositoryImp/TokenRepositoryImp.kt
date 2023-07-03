@@ -1,12 +1,14 @@
 package com.example.recommendtrack.data.repositoryImp
 
-import android.util.Log
 import com.example.recommendtrack.data.datasource.TokenRemoteDataSource
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
 import com.example.recommendtrack.data.mapper.TokenMapper
 import com.example.recommendtrack.domain.entity.Token
 import com.example.recommendtrack.domain.repository.TokenRepository
-import com.skydoves.sandwich.*
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnFailure
+import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,7 +23,7 @@ class TokenRepositoryImp @Inject constructor(
     override suspend fun fetchToken(grantType: String, clientId: String, clientSecret: String): Flow<Token> {
         val response = dataSource.fetchToken(grantType, clientId, clientSecret)
 
-        val flowToken = flow {
+        val tokenFlow = flow {
             response.suspendOnSuccess(TokenMapper) {
                 val token = this
                 Timber.tag("success").d( "$token")
@@ -34,6 +36,6 @@ class TokenRepositoryImp @Inject constructor(
             }
 
         }.flowOn(ioDispatcher)
-        return flowToken
+        return tokenFlow
     }
 }

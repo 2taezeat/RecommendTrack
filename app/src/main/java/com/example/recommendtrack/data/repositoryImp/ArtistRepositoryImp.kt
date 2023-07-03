@@ -23,7 +23,7 @@ class ArtistRepositoryImp
     override suspend fun searchArtist(accessToken: String, artistName: String, onError: (String) -> Unit): Flow<Artist> {
         val response = dataSource.searchArtist(accessToken, artistName)
 
-        val flowArtist = flow {
+        val artistFlow = flow {
             response.suspendOnSuccess(ArtistMapper) {
                 val artist = this
                 emit(artist)
@@ -38,7 +38,7 @@ class ArtistRepositoryImp
         }.flowOn(ioDispatcher)
 
 
-        return flowArtist
+        return artistFlow
     }
 
     override suspend fun fetchMyArtists(): Flow<List<Artist>> {

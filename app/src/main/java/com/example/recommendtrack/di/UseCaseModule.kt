@@ -12,6 +12,7 @@ import com.example.recommendtrack.domain.usecase.genre.AddMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.DeleteMyGenresUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetAllGenreUseCase
 import com.example.recommendtrack.domain.usecase.genre.GetMyGenresUseCase
+import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,7 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideGetTokenUseCase(repository: TokenRepository): GetTokenUseCase  {
+    fun provideGetTokenUseCase(repository: TokenRepository): GetTokenUseCase {
         return GetTokenUseCase(repository)
     }
 
