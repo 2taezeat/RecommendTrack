@@ -3,6 +3,7 @@ package com.example.recommendtrack.di
 import com.example.recommendtrack.BuildConfig
 import com.example.recommendtrack.data.remote.ArtistApi
 import com.example.recommendtrack.data.remote.GenreApi
+import com.example.recommendtrack.data.remote.SongApi
 import com.example.recommendtrack.data.remote.TokenApi
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -103,6 +104,12 @@ object NetworkModule {
         return retrofit.create(ArtistApi::class.java)
     }
 
+
+    @Singleton
+    @Provides
+    fun provideSongApi(@ContentRetrofit retrofit: Retrofit): SongApi {
+        return retrofit.create(SongApi::class.java)
+    }
 
 
 }

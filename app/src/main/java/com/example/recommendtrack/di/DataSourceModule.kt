@@ -26,4 +26,9 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun bindsArtistRemoteDataSource(dataSource: ArtistRemoteDataSourceImp): ArtistRemoteDataSource
+
+
+    @Singleton
+    @Binds
+    abstract fun bindsSongRemoteDataSource(dataSource: SongRemoteDataSourceImp): SongRemoteDataSource
 }

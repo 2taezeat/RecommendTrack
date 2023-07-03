@@ -2,9 +2,11 @@ package com.example.recommendtrack.di
 
 import com.example.recommendtrack.data.repositoryImp.ArtistRepositoryImp
 import com.example.recommendtrack.data.repositoryImp.GenreRepositoryImp
+import com.example.recommendtrack.data.repositoryImp.SongRepositoryImp
 import com.example.recommendtrack.data.repositoryImp.TokenRepositoryImp
 import com.example.recommendtrack.domain.repository.ArtistRepository
 import com.example.recommendtrack.domain.repository.GenreRepository
+import com.example.recommendtrack.domain.repository.SongRepository
 import com.example.recommendtrack.domain.repository.TokenRepository
 import dagger.Binds
 import dagger.Module
@@ -33,6 +35,11 @@ abstract class RepositoryModule {
         artistRepositoryImp: ArtistRepositoryImp
     ): ArtistRepository
 
+
+    @Binds
+    abstract fun bindSongRepository(
+        songRepositoryImp: SongRepositoryImp
+    ): SongRepository
 
 
 }
