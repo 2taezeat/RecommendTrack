@@ -17,7 +17,6 @@
             app:layout_constraintBottom_toTopOf="@id/main_bottom_nav_view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/main_nav_graph" />
 
@@ -28,6 +27,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/main_bottom_nav_view"
+            app:labelVisibilityMode="labeled"
             >
 
 
