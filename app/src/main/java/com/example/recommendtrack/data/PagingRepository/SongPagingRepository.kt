@@ -60,8 +60,11 @@ class SongPagingRepository @Inject constructor(
                 if (this.next == null) { nextKey = null }
             }
 
+
             response.suspendOnSuccess(SongMapper) {
                 songs = this
+                Timber.d("hello123, ${songs }")
+
             }.suspendOnFailure {
                 onError(this.message())
             }.suspendOnError(ErrorEnvelopeMapper) {

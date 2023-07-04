@@ -23,6 +23,7 @@ class ArtistRepositoryImp
     override suspend fun searchArtist(accessToken: String, artistName: String, onError: (String) -> Unit): Flow<Artist> {
         val response = dataSource.searchArtist(accessToken, artistName)
 
+
         val artistFlow = flow {
             response.suspendOnSuccess(ArtistMapper) {
                 val artist = this
