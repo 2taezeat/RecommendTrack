@@ -1,18 +1,15 @@
 package com.example.recommendtrack.data.repositoryImp
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.example.recommendtrack.data.PagingRepository.SongPagingRepository
 import com.example.recommendtrack.data.datasource.SongRemoteDataSource
-import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
-import com.example.recommendtrack.data.mapper.SongMapper
 import com.example.recommendtrack.domain.entity.Song
 import com.example.recommendtrack.domain.repository.SongRepository
-import com.skydoves.sandwich.message
-import com.skydoves.sandwich.suspendOnError
-import com.skydoves.sandwich.suspendOnFailure
-import com.skydoves.sandwich.suspendOnSuccess
+import com.example.recommendtrack.utils.Constants.PAGING_SIZE
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,32 +18,32 @@ class SongRepositoryImp @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
 ) : SongRepository {
 
-    override suspend fun searchSong(
+    override suspend fun searchSongsPaging(
         accessToken: String,
         songName: String,
         onError: (String) -> Unit,
-        limit: Int,
-        offset: Int
-    ): Flow<List<Song>> {
-        val response = dataSource.searchSong(accessToken, songName, limit, offset)
+    ): Flow<PagingData<Song>> {
+        Timber.d("searchSongsPaging")
+        val pagingSourceFactory = {
+            SongPagingRepository(
+                dataSource = dataSource,
+                accessToken = accessToken,
+                songName = songName,
+                onError = onError
+            )
+        }
 
-        val songFlow = flow {
-            response.suspendOnSuccess(SongMapper) {
-                val song = this
-                emit(song)
-                Timber.tag("success").d("$song")
-            }.suspendOnFailure {
-                //Timber.tag("fail").d("${this.message()}")
-                onError(this.message())
-            }.suspendOnError(ErrorEnvelopeMapper) {
-                val errorMessage = this.message
-                Timber.tag("error").d("$errorMessage")
-            }
-        }.flowOn(ioDispatcher)
-
-
-        return songFlow
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGING_SIZE,
+                enablePlaceholders = false,
+                maxSize = PAGING_SIZE * 3
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
     }
+
+
 }
 
 

@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface SongApi {
 
     @GET("search")
-    suspend fun getSong(
+    suspend fun getSongs(
         @Header("Authorization") accessToken: String,
         @Query("q") songName: String,
         @Query("type") type: String = TRACK_STRING_VALUE,

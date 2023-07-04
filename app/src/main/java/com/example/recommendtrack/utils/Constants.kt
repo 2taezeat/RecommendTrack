@@ -13,6 +13,7 @@ object Constants {
     const val ARTIST_STRING_VALUE = "artist"
     const val TRACK_STRING_VALUE = "track"
     const val TOKEN_TYPE_BEARER = "Bearer"
+    const val PAGING_SIZE = 10
 
 }
 

@@ -48,7 +48,7 @@ abstract class TokenViewModel(
         viewModelScope.launch {
             val tokenString = tokenFlowFromDataStore().first()
             if (tokenString.isEmpty()) {
-                val tokenRemoteFlow = getTokenUseCase.invoke(
+                val tokenRemoteFlow = getTokenUseCase(
                     Constants.SPOTIFY_GRANT_TYPE,
                     BuildConfig.SPOTIFY_CLIENT_ID,
                     BuildConfig.SPOTIFY_CLIENT_SECRET

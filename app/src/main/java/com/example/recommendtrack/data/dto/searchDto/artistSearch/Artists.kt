@@ -11,11 +11,11 @@ data class Artists(
     @SerializedName("limit")
     val limit: Int,
     @SerializedName("next")
-    val next: String,
+    val next: String?,
     @SerializedName("offset")
     val offset: Int,
     @SerializedName("previous")
-    val previous: Any,
+    val previous: String?,
     @SerializedName("total")
     val total: Int
 )

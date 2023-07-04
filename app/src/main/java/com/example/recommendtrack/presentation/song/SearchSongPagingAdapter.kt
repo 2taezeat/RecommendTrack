@@ -2,12 +2,12 @@ package com.example.recommendtrack.presentation.song
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import com.example.recommendtrack.databinding.ItemSearchSongBinding
 import com.example.recommendtrack.domain.entity.Song
 
-class SearchSongAdapter(): ListAdapter<Song, SearchSongViewHolder>(songSearchDiffUtilCallBack) {
+class SearchSongPagingAdapter(): PagingDataAdapter<Song, SearchSongViewHolder>(songSearchDiffUtilCallBack) {
     companion object {
         private val songSearchDiffUtilCallBack = object : DiffUtil.ItemCallback<Song>() {
             override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
@@ -25,8 +25,11 @@ class SearchSongAdapter(): ListAdapter<Song, SearchSongViewHolder>(songSearchDif
     }
 
     override fun onBindViewHolder(holder: SearchSongViewHolder, position: Int) {
-        val searchedSong = currentList[position]
-        holder.bind(searchedSong)
+        val pagedSong = getItem(position)
+        pagedSong?.let {
+            holder.bind(pagedSong)
+        }
+
     }
 }
 

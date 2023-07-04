@@ -46,7 +46,7 @@ class ArtistViewModel @Inject constructor(
     fun searchArtist(artistName: String) {
         viewModelScope.launch {
             val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"
-            searchArtistUseCase.invoke(accessToken, "${ARTIST_STRING_VALUE}:${artistName}", onError = { errorMessage = it }).collect { it ->
+            searchArtistUseCase(accessToken, "${ARTIST_STRING_VALUE}:${artistName}", onError = { errorMessage = it }).collect { it ->
                 _searchArtist.value = it
             }
         }
@@ -69,7 +69,7 @@ class ArtistViewModel @Inject constructor(
     fun getMyArtists() {
         Timber.d("getMyArtists")
         viewModelScope.launch {
-            _myArtists.value = getMyArtistsUseCase.invoke().first()
+            _myArtists.value = getMyArtistsUseCase().first()
             Timber.d("${_myArtists.value}")
         }
     }

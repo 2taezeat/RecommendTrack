@@ -1,8 +1,6 @@
-package com.example.recommendtrack.data.dto.searchDto.trackDto
+package com.example.recommendtrack.data.dto.searchDto
 
-
-data class Tracks(
-    val items: List<ItemInTrack>,
+data class SearchResponseMeta(
     val href: String,
     val limit: Int,
     val next: String?,

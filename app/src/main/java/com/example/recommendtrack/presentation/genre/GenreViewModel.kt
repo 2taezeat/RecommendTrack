@@ -46,7 +46,7 @@ class GenreViewModel @Inject constructor(
         Timber.d("getAllGenres_call")
         viewModelScope.launch {
             val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"
-            getAllGenreUseCase.invoke(accessToken, onError = { errorMessage = it }).collect {
+            getAllGenreUseCase(accessToken, onError = { errorMessage = it }).collect {
                 _genres.value = it
             }
         }
@@ -55,20 +55,20 @@ class GenreViewModel @Inject constructor(
 
     fun addMyGenres(myGenres: List<Genre>) {
         viewModelScope.launch {
-            addMyGenresUseCase.invoke(myGenres)
+            addMyGenresUseCase(myGenres)
         }
     }
 
     fun deleteMyGenres(deletingGenres: List<Genre>) {
         viewModelScope.launch {
-            deleteMyGenresUseCase.invoke(deletingGenres)
+            deleteMyGenresUseCase(deletingGenres)
         }
     }
 
 
     fun getMyGenres() {
         viewModelScope.launch {
-            _myGenres.value = getMyGenresUseCase.invoke().first()
+            _myGenres.value = getMyGenresUseCase().first()
         }
     }
 

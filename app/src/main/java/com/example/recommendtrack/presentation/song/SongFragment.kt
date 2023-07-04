@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +24,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
     private lateinit var songSearchView: SearchView
     private lateinit var songSearchBar: SearchBar
     private lateinit var songSearchRecyclerView: RecyclerView
-    private lateinit var searchSongAdapter: SearchSongAdapter
+    private lateinit var searchSongAdapter: SearchSongPagingAdapter
 
 
 
@@ -41,9 +40,8 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
         initSearchView()
         initRecyclerView()
 
-        songViewModel.searchedSongs.observe(viewLifecycleOwner, Observer { it ->
-            searchSongAdapter.submitList(it)
-        })
+
+        collectLatestStateFlow(songViewModel.searchedPagedSongs) { searchSongAdapter.submitData(it) }
     }
 
 
@@ -59,7 +57,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
             override fun onTextChanged(searchString: CharSequence, p1: Int, p2: Int, p3: Int) {
                 if (searchString.length >= 3) {
                     Timber.d("${searchString}")
-                    songViewModel.searchSong(searchString.toString())
+                    songViewModel.searchSongsPaging(searchString.toString())
 
                 }
             }
@@ -69,7 +67,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
     }
 
     private fun initRecyclerView() {
-        searchSongAdapter = SearchSongAdapter()
+        searchSongAdapter = SearchSongPagingAdapter()
 
 
         songSearchRecyclerView = binding.searchSongRV.apply {
@@ -79,8 +77,6 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
             adapter = searchSongAdapter
 
         }
-
-
 
     }
 
