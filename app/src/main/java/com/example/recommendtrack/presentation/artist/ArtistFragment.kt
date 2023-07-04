@@ -7,8 +7,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentArtistBinding
@@ -19,7 +18,7 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_artist) {
-    private val artistViewModel: ArtistViewModel by activityViewModels()
+    private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var searchView: SearchView
     private lateinit var artistNameTextView: TextView
     private lateinit var artistFollowersTextView: TextView
@@ -50,14 +49,16 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
         initView()
 
 
-        artistViewModel.searchArtist.observe(viewLifecycleOwner, Observer { it ->
+        artistViewModel.searchArtist.observe(viewLifecycleOwner) { it ->
             artistNameTextView.text = it.name
             artistFollowersTextView.text = it.followers.toString()
             artistPopularityTextView.text = it.popularity.toString()
             artistGenresTextView.text = it.genres.toString()
 
             artistIsMyCheckBox.isChecked = artistViewModel.myArtists.value!!.any { myArtists -> myArtists.name == it.name }
-        })
+        }
+
+
 
     }
 

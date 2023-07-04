@@ -73,6 +73,7 @@ class GenreViewModel @Inject constructor(
     }
 
 
+
     override fun onCleared() {
         Timber.d("onCleared_genreViewModel")
         super.onCleared()

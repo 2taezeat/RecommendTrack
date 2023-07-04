@@ -3,11 +3,11 @@ package com.example.recommendtrack.presentation.genre
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentGenreBinding
 import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.presentation.BaseFragment
+import com.example.recommendtrack.utils.EventObserver
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
-    private val viewModel : GenreViewModel by viewModels()
+    private val genreViewModel : GenreViewModel by viewModels()
     private lateinit var genreChipGroup: ChipGroup
     private lateinit var myGenres : MutableList<Genre>
     private lateinit var deleteGenres : MutableList<Genre>
@@ -31,17 +31,20 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
         super.onViewCreated(view, savedInstanceState)
         genreChipGroup = binding.genreChipGroup
         initProperty()
-        viewModel.myGenres.observe(viewLifecycleOwner, Observer {
+        genreViewModel.myGenres.observe(viewLifecycleOwner) {
             myGenres = it.toMutableList()
-        })
+        }
 
-        viewModel.genres.observe(viewLifecycleOwner, Observer {
+        genreViewModel.genres.observe(viewLifecycleOwner) {
             initGenreChipView(it)
+        }
+
+        genreViewModel.refreshToken.observe(viewLifecycleOwner, EventObserver {
+            Snackbar.make(view, R.string.refresh_token_message, Snackbar.LENGTH_SHORT).show()
         })
 
-        viewModel.refreshToken.observe(viewLifecycleOwner, Observer {
-            Snackbar.make(view, R.string.refresh_token_message, Snackbar.LENGTH_LONG).show()
-        })
+
+
 
         initGenreSaveView()
 
@@ -54,7 +57,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     override fun onStop() {
         super.onStop()
-        viewModel.getMyGenres()
+        genreViewModel.getMyGenres()
     }
 
 
@@ -65,14 +68,14 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             val distinctDeleteGenres = deleteGenres.distinct()
 
             if (distinctMyGenres.size <= 5) {
-                viewModel.addMyGenres(distinctMyGenres)
-                viewModel.deleteMyGenres(distinctDeleteGenres)
+                genreViewModel.addMyGenres(distinctMyGenres)
+                genreViewModel.deleteMyGenres(distinctDeleteGenres)
                 Snackbar.make(it, R.string.genre_add_delete_both_success_message, Snackbar.LENGTH_LONG).show()
 
             } else {
                 Snackbar.make(it, R.string.genre_add_only_five_genre_message, Snackbar.LENGTH_LONG).show()
                 Snackbar.make(it, R.string.genre_delete_only_success_message, Snackbar.LENGTH_LONG).show()
-                viewModel.deleteMyGenres(distinctDeleteGenres)
+                genreViewModel.deleteMyGenres(distinctDeleteGenres)
             }
         }
 

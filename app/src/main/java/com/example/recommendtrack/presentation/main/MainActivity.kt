@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
         artistViewModel.getMyArtists()
 
         Timber.d("${mainViewModel}")
+
+
     }
 
     private fun getNavController(): NavController {

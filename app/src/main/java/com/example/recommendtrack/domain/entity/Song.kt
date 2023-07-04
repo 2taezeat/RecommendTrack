@@ -1,8 +1,8 @@
 package com.example.recommendtrack.domain.entity
 
 import androidx.room.Entity
-import com.example.recommendtrack.data.dto.searchDto.trackDto.Album
-import com.example.recommendtrack.data.dto.searchDto.trackDto.ArtistInTrack
+import com.example.recommendtrack.data.dto.searchDto.trackSearch.Album
+import com.example.recommendtrack.data.dto.searchDto.trackSearch.ArtistInTrack
 
 
 @Entity
