@@ -5,7 +5,7 @@ import com.example.recommendtrack.domain.repository.ArtistRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetMyArtistsUseCase(private val artistRepository: ArtistRepository) {
-    suspend fun invoke(): Flow<List<Artist>> {
+    suspend operator fun invoke(): Flow<List<Artist>> {
         return artistRepository.fetchMyArtists()
     }
 }

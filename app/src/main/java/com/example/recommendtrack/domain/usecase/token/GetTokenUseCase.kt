@@ -5,7 +5,7 @@ import com.example.recommendtrack.domain.repository.TokenRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetTokenUseCase(private val tokenRepository: TokenRepository) {
-    suspend fun invoke(
+    suspend operator fun invoke(
         grantType: String,
         clientId: String,
         clientSecret: String
