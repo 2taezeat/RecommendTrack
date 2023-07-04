@@ -7,6 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
@@ -30,6 +36,18 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fr
         super.onDestroyView()
         _binding = null
     }
+
+
+
+    fun <T> collectLatestStateFlow(flow: Flow<T>, action: suspend (T) -> Unit) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collectLatest(action)
+            }
+        }
+    }
+
+
 
 
 }
