@@ -73,9 +73,11 @@ abstract class TokenViewModel(
         }
     }
 
-    private suspend fun removeToken() {
-        Timber.d("removeToken")
-        writeTokenDataStore("")
+    fun removeToken() {
+        Timber.d("removeToken_call")
+        viewModelScope.launch {
+            writeTokenDataStore("")
+        }
     }
 
 

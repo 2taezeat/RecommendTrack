@@ -54,11 +54,13 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
         songSearchView.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(searchString: CharSequence, p1: Int, p2: Int, p3: Int) {
+            override fun onTextChanged(searchString: CharSequence, start: Int, before: Int, count: Int) {
+
+
                 if (searchString.length >= 3) {
                     Timber.d("${searchString}")
                     songViewModel.searchSongsPaging(searchString.toString())
-
+                    Timber.d("${ start}, ${before }, ${ count}")
                 }
             }
 

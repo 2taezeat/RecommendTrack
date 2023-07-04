@@ -67,7 +67,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="60dp"
-            android:text="refresh token"
+            android:text="delete token"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
