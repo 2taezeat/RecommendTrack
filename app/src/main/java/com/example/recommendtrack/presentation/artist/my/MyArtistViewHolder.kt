@@ -8,11 +8,15 @@ import com.example.recommendtrack.domain.entity.Artist
 import com.google.android.material.snackbar.Snackbar
 
 
-class MyArtistViewHolder(val itemMyArtistBinding: ItemMyArtistBinding, private val myArtistUpdateCallBack: MyArtistUpdateCallBack?) :
+class MyArtistViewHolder(val itemMyArtistBinding: ItemMyArtistBinding, private val myArtistUpdateCallBack: MyArtistUpdateCallBack?, private val onItemClickListener: ((Artist) -> Unit)?) :
     RecyclerView.ViewHolder(itemMyArtistBinding.root) {
+
+
 
     fun bind(artist: Artist) {
         itemView.apply {
+            setOnClickListener { onItemClickListener?.let { it(artist) } }
+
             itemMyArtistBinding.myArtistNameTV.text = artist.name
 
             Glide.with(context)
@@ -27,8 +31,6 @@ class MyArtistViewHolder(val itemMyArtistBinding: ItemMyArtistBinding, private v
                 Snackbar.make(it, "ItemInTrack $layoutPosition touched!", Snackbar.LENGTH_LONG).show()
                 myArtistUpdateCallBack?.getMyArtist()
             }
-
-
         }
     }
 

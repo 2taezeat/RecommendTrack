@@ -23,7 +23,6 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
 
 
 
-
     companion object {
         private val artistDiffUtilCallBack = object : DiffUtil.ItemCallback<Artist>() {
             override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
@@ -37,17 +36,14 @@ class MyArtistAdapter(private val myArtistUpdateCallBack: MyArtistUpdateCallBack
      }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyArtistViewHolder {
-        return MyArtistViewHolder(ItemMyArtistBinding.inflate(LayoutInflater.from(parent.context), parent, false), myArtistUpdateCallBack)
+        val itemMyArtistBinding = ItemMyArtistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyArtistViewHolder(itemMyArtistBinding, myArtistUpdateCallBack, onItemClickListener)
 
     }
 
     override fun onBindViewHolder(holder: MyArtistViewHolder, position: Int) {
         val myArtist = currentList[position]
         holder.bind(artist = myArtist)
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let{ it(myArtist) }
-        }
-
     }
 
     override fun onItemMove(from: Int, to: Int) {

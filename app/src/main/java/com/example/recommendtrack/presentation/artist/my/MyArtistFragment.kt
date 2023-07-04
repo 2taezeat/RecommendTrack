@@ -72,10 +72,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
         myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
         myArtistAdapter.apply {
             submitList(artistViewModel.myArtists.value)
+
+
             setOnItemClickListener {
                 val action = MyArtistFragmentDirections.actionMyArtistFragmentToArtistInfoFragment(it)
                 findNavController().navigate(action)
             }
+
+
         }
 
         myArtistRecyclerView = binding.myArtistRV.apply {
