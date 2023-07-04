@@ -1,4 +1,4 @@
-package com.example.recommendtrack.data.dto.searchDto.trackDto
+package com.example.recommendtrack.data.dto.searchDto.trackSearch
 
 import com.example.recommendtrack.data.dto.searchDto.ExternalUrls
 import com.example.recommendtrack.data.dto.searchDto.Image

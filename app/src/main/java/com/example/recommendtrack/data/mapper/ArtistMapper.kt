@@ -32,3 +32,8 @@ object ArtistMapper : ApiSuccessModelMapper<ArtistDto, Artist> {
     }
 
 }
+
+
+
+
+
