@@ -14,7 +14,7 @@ class SongRemoteDataSourceImp @Inject constructor(private val songApi: SongApi) 
     override suspend fun searchSongs(
         accessToken: String, songName: String, limit: Int, offset: Int
     ): ApiResponse<SongDto> {
-        Timber.d("searchSongs")
+        Timber.d("searchSongs, ${offset}")
         return songApi.getSongs(accessToken = accessToken, songName = songName, limit = limit, offset = offset)
     }
 

@@ -82,7 +82,7 @@ class ArtistFragment : BaseFragment<FragmentArtistBinding>(R.layout.fragment_art
 
         refreshTokenButton = binding.artistRefreshTokenButton
         refreshTokenButton.setOnClickListener {
-            artistViewModel.removeToken()
+            //artistViewModel.removeToken()
         }
 
 

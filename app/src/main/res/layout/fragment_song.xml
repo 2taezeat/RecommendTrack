@@ -60,13 +60,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/song_search_progress_bar"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center|bottom"
                 android:visibility="invisible"
-
                 >
 
 
             </ProgressBar>
+
+            <Button
+                android:id="@+id/search_view_refresh_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/refresh"
+                android:layout_gravity="center|top"
+                android:visibility="invisible"
+                android:translationZ="2dp"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"

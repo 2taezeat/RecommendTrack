@@ -39,21 +39,28 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("${songViewModel}")
 
-        initSearchView()
-        initRecyclerView()
+
+        initSearchAdapter()
         setSearchSongPagingLoadState()
+        initRecyclerView()
+        initSearchView()
 
 
         collectLatestStateFlow(songViewModel.searchedPagedSongs) { searchSongAdapter.submitData(it) }
     }
 
+    private fun initSearchAdapter() {
+        searchSongAdapter = SearchSongPagingAdapter()
+        binding.searchViewRefreshBtn.setOnClickListener {
+            searchSongAdapter.refresh()
+        }
 
+    }
 
 
     private fun initSearchView() {
         songSearchBar = binding.songSearchBar
         songSearchView = binding.songSearchView
-
         songSearchView.editText.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -70,15 +77,18 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
             override fun afterTextChanged(p0: Editable?) {}
         })
+
+
     }
 
     private fun initRecyclerView() {
-        searchSongAdapter = SearchSongPagingAdapter()
         songSearchRecyclerView = binding.searchSongRV.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-            adapter = searchSongAdapter
+            adapter = searchSongAdapter.withLoadStateFooter(
+                footer = SearchSongLoadStateAdapter(searchSongAdapter::retry)
+            )
 
         }
 
@@ -91,12 +101,13 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
             val isSongsEmpty = searchSongAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
+            val isError = loadState.refresh is LoadState.Error || loadState.prepend is LoadState.Error
 
             binding.songSearchNoResultTv.isVisible = isSongsEmpty
-            songSearchRecyclerView.isVisible = !isSongsEmpty
+            songSearchRecyclerView.isVisible = !isError
             binding.songSearchProgressBar.isVisible = loadState.refresh is LoadState.Loading
+            binding.searchViewRefreshBtn.isVisible = isError
         }
-
 
     }
 

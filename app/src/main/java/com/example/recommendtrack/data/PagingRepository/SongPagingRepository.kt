@@ -6,7 +6,6 @@ import com.example.recommendtrack.data.datasource.SongRemoteDataSource
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
 import com.example.recommendtrack.data.mapper.SongMapper
 import com.example.recommendtrack.domain.entity.Song
-import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
@@ -14,6 +13,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.random.Random
 
 
 class SongPagingRepository @Inject constructor(
@@ -55,16 +55,27 @@ class SongPagingRepository @Inject constructor(
                 offset = offset
             )
 
+            if (Random.nextFloat() < 0.5) {
+                Timber.d("test error")
+                throw Exception("test error !!!")
+            } else {
+                Timber.d("test success")
+
+            }
+
+
+
             response.suspendOnSuccess(SongMapper) {
                 if (this.first.next == null) { nextKey = null }
                 songs = this.second
             }.suspendOnFailure {
-                onError(this.message())
+                //onError(this.message())
                 nextKey = null
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")
             }
+
 
             Timber.d("pagingNum: ${currentPageNumber}, ${ prevKey }, ${nextKey}")
 
@@ -80,6 +91,9 @@ class SongPagingRepository @Inject constructor(
         } catch (exception: HttpException) {
             onError("HttpException")
             LoadResult.Error(exception)
+        } catch (testException: Exception) {
+            onError("testException")
+            LoadResult.Error(testException)
         }
 
 
