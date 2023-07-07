@@ -45,10 +45,34 @@
             >
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_result"
+                android:layout_gravity="center"
+                android:id="@+id/song_search_no_result_tv"
+                android:textSize="18sp"
+                android:visibility="invisible"
+                >
+            </TextView>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/song_search_progress_bar"
+                android:layout_gravity="bottom"
+                android:visibility="invisible"
+
+                >
+
+
+            </ProgressBar>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/searchSongRV"
+                android:scrollbars="vertical"
                 >
 
             </androidx.recyclerview.widget.RecyclerView>

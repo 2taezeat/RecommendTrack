@@ -33,7 +33,7 @@
     <string name="my_artist_button">My Artist</string>
 
     <string name="song_search_hint">Search Song</string>
-
+    <string name="no_result">No Result</string>
 
 
     <!--    <string name="recommend_track_menu">my_artist_fragment</string>-->

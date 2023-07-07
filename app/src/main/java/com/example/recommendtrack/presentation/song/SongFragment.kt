@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +41,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
         initSearchView()
         initRecyclerView()
+        setSearchSongPagingLoadState()
 
 
         collectLatestStateFlow(songViewModel.searchedPagedSongs) { searchSongAdapter.submitData(it) }
@@ -48,17 +51,21 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
 
     private fun initSearchView() {
-        songSearchView = binding.songSearchView
         songSearchBar = binding.songSearchBar
+        songSearchView = binding.songSearchView
 
         songSearchView.editText.addTextChangedListener(object : TextWatcher {
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(searchString: CharSequence, start: Int, before: Int, count: Int) {
-                if (searchString.length >= 3) {
-                    Timber.d("${searchString}, ${ start}, ${before }, ${ count}")
+                if (searchString.length >= 2) {
                     songViewModel.searchSongsPaging(searchString.toString())
+                } else if (searchString.length <= 1) {
+                    binding.songSearchNoResultTv.isVisible = true
+                    songSearchRecyclerView.isVisible = false
                 }
+
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -67,8 +74,6 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
 
     private fun initRecyclerView() {
         searchSongAdapter = SearchSongPagingAdapter()
-
-
         songSearchRecyclerView = binding.searchSongRV.apply {
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -78,6 +83,23 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
         }
 
     }
+
+
+    private fun setSearchSongPagingLoadState() {
+        searchSongAdapter.addLoadStateListener { combinedLoadStates ->
+            val loadState = combinedLoadStates.source
+            val isSongsEmpty = searchSongAdapter.itemCount < 1
+                    && loadState.refresh is LoadState.NotLoading
+                    && loadState.append.endOfPaginationReached
+
+            binding.songSearchNoResultTv.isVisible = isSongsEmpty
+            songSearchRecyclerView.isVisible = !isSongsEmpty
+            binding.songSearchProgressBar.isVisible = loadState.refresh is LoadState.Loading
+        }
+
+
+    }
+
 
 
     companion object {
