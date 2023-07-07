@@ -38,11 +38,11 @@ class GenreViewModel @Inject constructor(
 
 
     init {
-        getAllGenres()
+        //getAllGenres()
         getMyGenres()
     }
 
-    private fun getAllGenres() {
+    fun getAllGenres() {
         Timber.d("getAllGenres_call")
         viewModelScope.launch {
             val accessToken = "$TOKEN_TYPE_BEARER ${tokenFlowFromDataStore().first()}"

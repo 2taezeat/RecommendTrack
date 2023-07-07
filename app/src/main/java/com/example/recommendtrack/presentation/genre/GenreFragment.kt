@@ -12,6 +12,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
@@ -23,12 +24,18 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("onCreate, ${genreViewModel.genres.value}")
+
 
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (genreViewModel.genres.value == null) {
+            genreViewModel.getAllGenres()
+        }
+
         genreChipGroup = binding.genreChipGroup
         initProperty()
         genreViewModel.myGenres.observe(viewLifecycleOwner) {
@@ -45,9 +52,7 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
 
 
-
         initGenreSaveView()
-
     }
 
     private fun initProperty() {

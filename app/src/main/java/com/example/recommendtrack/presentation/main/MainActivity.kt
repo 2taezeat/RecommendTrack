@@ -27,10 +27,7 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
         setContentView(binding.root)
         initBottomNavView()
         artistViewModel.getMyArtists()
-
         Timber.d("${mainViewModel}")
-
-
     }
 
     private fun getNavController(): NavController {
