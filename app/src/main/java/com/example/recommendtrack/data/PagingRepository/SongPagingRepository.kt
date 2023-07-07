@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.recommendtrack.data.datasource.SongRemoteDataSource
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
-import com.example.recommendtrack.data.mapper.SearchMetaMapper
 import com.example.recommendtrack.data.mapper.SongMapper
 import com.example.recommendtrack.domain.entity.Song
 import com.skydoves.sandwich.message
@@ -56,15 +55,12 @@ class SongPagingRepository @Inject constructor(
                 offset = offset
             )
 
-            response.suspendOnSuccess(SearchMetaMapper) {
-                if (this.next == null) { nextKey = null }
-            }
-
-
             response.suspendOnSuccess(SongMapper) {
-                songs = this
+                if (this.first.next == null) { nextKey = null }
+                songs = this.second
             }.suspendOnFailure {
                 onError(this.message())
+                nextKey = null
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")

@@ -1,6 +1,6 @@
 package com.example.recommendtrack.data.dto.searchDto
 
-data class SearchResponseMeta(
+data class SearchMeta(
     val href: String,
     val limit: Int,
     val next: String?,
