@@ -40,7 +40,7 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener): ItemTouc
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val myArtistViewHolder = viewHolder as MyArtistViewHolder
+        val myArtistViewHolder = viewHolder as MyArtistAdapter.MyArtistViewHolder
         myArtistViewHolder.itemMyArtistBinding.myArtistFavoriteIV.callOnClick()
     }
 
