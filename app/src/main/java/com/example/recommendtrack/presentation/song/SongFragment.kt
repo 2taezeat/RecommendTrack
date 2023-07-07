@@ -55,12 +55,9 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(searchString: CharSequence, start: Int, before: Int, count: Int) {
-
-
                 if (searchString.length >= 3) {
-                    Timber.d("${searchString}")
+                    Timber.d("${searchString}, ${ start}, ${before }, ${ count}")
                     songViewModel.searchSongsPaging(searchString.toString())
-                    Timber.d("${ start}, ${before }, ${ count}")
                 }
             }
 
