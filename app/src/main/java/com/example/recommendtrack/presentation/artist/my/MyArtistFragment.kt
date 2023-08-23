@@ -26,6 +26,7 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
     private lateinit var itemTouchHelper : ItemTouchHelper
 
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         myArtistUpdateCallBack = context as MyArtistUpdateCallBack?

@@ -7,12 +7,10 @@ import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.FragmentGenreBinding
 import com.example.recommendtrack.domain.entity.Genre
 import com.example.recommendtrack.presentation.BaseFragment
-import com.example.recommendtrack.utils.EventObserver
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre) {
@@ -24,9 +22,6 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("onCreate, ${genreViewModel.genres.value}")
-
-
     }
 
 
@@ -46,9 +41,9 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
             initGenreChipView(it)
         }
 
-        genreViewModel.refreshToken.observe(viewLifecycleOwner, EventObserver {
-            Snackbar.make(view, R.string.refresh_token_message, Snackbar.LENGTH_SHORT).show()
-        })
+//        genreViewModel.refreshToken.observe(viewLifecycleOwner, EventObserver {
+//            Snackbar.make(view, R.string.refresh_token_message, Snackbar.LENGTH_SHORT).show()
+//        })
 
 
 

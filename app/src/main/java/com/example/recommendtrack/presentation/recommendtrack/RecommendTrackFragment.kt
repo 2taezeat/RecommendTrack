@@ -15,23 +15,32 @@ class RecommendTrackFragment : BaseFragment<FragmentRecommendTrackBinding>(R.lay
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.d("onCreate")
+
         super.onCreate(savedInstanceState)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.d("onViewCreated")
+
         Timber.d("${viewModel}")
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.d("onDestroyView")
 
-    companion object {
-        fun newInstance() =
-            RecommendTrackFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.d("onDestroy")
+
+    }
+
+
+
 }

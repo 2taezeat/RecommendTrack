@@ -3,14 +3,11 @@ package com.example.recommendtrack.presentation.main
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recommendtrack.BuildConfig
 import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
 import com.example.recommendtrack.utils.Constants
-import com.example.recommendtrack.utils.Event
 import com.example.recommendtrack.utils.PreferenceKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -24,8 +21,6 @@ abstract class TokenViewModel(
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
 
-    private val _refreshToken = MutableLiveData<Event<String>>()
-    val refreshToken: LiveData<Event<String>> = _refreshToken
 
     init {
         Timber.d("TokenViewModel.init")
@@ -41,6 +36,8 @@ abstract class TokenViewModel(
         preferences[PreferenceKey.tokenPreferenceKey] ?: ""
     }
 
+
+
     private suspend fun writeTokenDataStore(str: String) {
         dataStore.edit { preferences ->
             preferences[PreferenceKey.tokenPreferenceKey] = str
@@ -48,6 +45,7 @@ abstract class TokenViewModel(
     }
 
     private fun getToken() {
+        Timber.d("getToken_Call")
         viewModelScope.launch {
             val tokenString = tokenFlowFromDataStore().first()
             if (tokenString.isEmpty()) {
@@ -60,12 +58,11 @@ abstract class TokenViewModel(
                     writeTokenDataStore(token.accessToken)
                 }
             }
-            _refreshToken.value = Event(tokenString)
         }
     }
 
 
-    fun refreshToken() {
+    private fun refreshToken() {
         Timber.d("refreshToken_Call")
         viewModelScope.launch {
             removeToken()

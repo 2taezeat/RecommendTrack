@@ -46,6 +46,8 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
         initSearchView()
 
 
+
+
         collectLatestStateFlow(songViewModel.searchedPagedSongs) { searchSongAdapter.submitData(it) }
     }
 

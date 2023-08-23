@@ -18,8 +18,8 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val mainViewModel : MainViewModel by viewModels()
-    private val artistViewModel : ArtistViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+    private val artistViewModel: ArtistViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +27,13 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
         setContentView(binding.root)
         initBottomNavView()
         artistViewModel.getMyArtists()
-        Timber.d("${mainViewModel}")
+
+        showWorkStatus()
     }
 
     private fun getNavController(): NavController {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
         return navHostFragment.navController
     }
 
@@ -53,5 +55,14 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
     override fun getMyArtist() {
         artistViewModel.getMyArtists()
     }
+
+
+    private fun showWorkStatus() {
+        mainViewModel.getWorkStatus().observe(this) { workInfo ->
+            Timber.d("${workInfo }")
+        }
+
+    }
+
 
 }

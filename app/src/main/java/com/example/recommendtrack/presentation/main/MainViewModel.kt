@@ -1,24 +1,55 @@
 package com.example.recommendtrack.presentation.main
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import com.example.recommendtrack.domain.usecase.token.GetTokenUseCase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.example.recommendtrack.presentation.worker.TokenWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getTokenUseCase: GetTokenUseCase,
-    private val dataStore: DataStore<Preferences>
-) : TokenViewModel(getTokenUseCase, dataStore) {
+    private val workManager: WorkManager
+) : ViewModel() {
 
 
     init {
-        //getToken()
+        setTokenWork()
     }
 
 
+    private fun setTokenWork() {
+        Timber.d("setTokenWork")
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val tokenWorkRequest =
+            PeriodicWorkRequestBuilder<TokenWorker>(1, TimeUnit.HOURS, 15, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                .build()
+
+        workManager.enqueueUniquePeriodicWork(
+            TOKEN_WORKER_KEY,
+            ExistingPeriodicWorkPolicy.KEEP,
+            tokenWorkRequest
+        )
+    }
+
+    fun getWorkStatus(): LiveData<MutableList<WorkInfo>> = workManager.getWorkInfosForUniqueWorkLiveData(TOKEN_WORKER_KEY)
+
+
+    companion object {
+        private const val TOKEN_WORKER_KEY = "token_worker"
+    }
 
 
 }
