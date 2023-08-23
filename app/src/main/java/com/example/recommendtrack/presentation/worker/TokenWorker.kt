@@ -26,6 +26,7 @@ class TokenWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         Timber.d("worker_doWork")
+
         return try {
             getToken()
             Result.success()
@@ -42,17 +43,13 @@ class TokenWorker @AssistedInject constructor(
             BuildConfig.SPOTIFY_CLIENT_ID,
             BuildConfig.SPOTIFY_CLIENT_SECRET
         )
-        tokenRemoteFlow.collect { token ->
-            writeTokenDataStore(token.accessToken)
-        }
+        tokenRemoteFlow.collect { token -> writeTokenDataStore(token.accessToken) }
 
     }
 
     private suspend fun writeTokenDataStore(str: String) {
         Timber.d("worker_writeTokenDataStore_Call")
-        dataStore.edit { preferences ->
-            preferences[PreferenceKey.tokenPreferenceKey] = str
-        }
+        dataStore.edit { preferences -> preferences[PreferenceKey.tokenPreferenceKey] = str }
     }
 
 

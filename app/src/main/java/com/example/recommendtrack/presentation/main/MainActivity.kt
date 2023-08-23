@@ -14,6 +14,7 @@ import com.example.recommendtrack.domain.entity.Artist
 import com.example.recommendtrack.presentation.artist.ArtistViewModel
 import com.example.recommendtrack.presentation.artist.my.MyArtistUpdateCallBack
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
 
     private fun tokenWorkStatus() {
         mainViewModel.getTokenWorkStatus().observe(this) { workInfo ->
+            Timber.d("${workInfo}")
             if (workInfo[0].state == WorkInfo.State.RUNNING) {
                 Toast.makeText(this, R.string.refresh_token_message_by_worker_manager,Toast.LENGTH_SHORT).show()
             }

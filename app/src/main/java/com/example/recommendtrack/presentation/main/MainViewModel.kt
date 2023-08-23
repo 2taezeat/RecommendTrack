@@ -44,7 +44,8 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun getTokenWorkStatus(): LiveData<MutableList<WorkInfo>> = workManager.getWorkInfosForUniqueWorkLiveData(TOKEN_WORKER_KEY)
+    fun getTokenWorkStatus(): LiveData<MutableList<WorkInfo>> =
+        workManager.getWorkInfosForUniqueWorkLiveData(TOKEN_WORKER_KEY) // IN PeriodicWork, ENQUEUED >> RUNNING >> ENQUEUED >> RUNNING >> ...
 
 
     companion object {
