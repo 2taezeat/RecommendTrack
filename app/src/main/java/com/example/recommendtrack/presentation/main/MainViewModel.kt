@@ -44,7 +44,7 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun getWorkStatus(): LiveData<MutableList<WorkInfo>> = workManager.getWorkInfosForUniqueWorkLiveData(TOKEN_WORKER_KEY)
+    fun getTokenWorkStatus(): LiveData<MutableList<WorkInfo>> = workManager.getWorkInfosForUniqueWorkLiveData(TOKEN_WORKER_KEY)
 
 
     companion object {

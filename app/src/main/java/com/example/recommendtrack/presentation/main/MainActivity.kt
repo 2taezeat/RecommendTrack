@@ -1,18 +1,19 @@
 package com.example.recommendtrack.presentation.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.WorkInfo
 import com.example.recommendtrack.R
 import com.example.recommendtrack.databinding.ActivityMainBinding
 import com.example.recommendtrack.domain.entity.Artist
 import com.example.recommendtrack.presentation.artist.ArtistViewModel
 import com.example.recommendtrack.presentation.artist.my.MyArtistUpdateCallBack
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
         initBottomNavView()
         artistViewModel.getMyArtists()
 
-        showWorkStatus()
+        tokenWorkStatus()
     }
 
     private fun getNavController(): NavController {
@@ -57,9 +58,11 @@ class MainActivity : AppCompatActivity(), MyArtistUpdateCallBack {
     }
 
 
-    private fun showWorkStatus() {
-        mainViewModel.getWorkStatus().observe(this) { workInfo ->
-            Timber.d("${workInfo }")
+    private fun tokenWorkStatus() {
+        mainViewModel.getTokenWorkStatus().observe(this) { workInfo ->
+            if (workInfo[0].state == WorkInfo.State.RUNNING) {
+                Toast.makeText(this, R.string.refresh_token_message_by_worker_manager,Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
