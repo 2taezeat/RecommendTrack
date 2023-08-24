@@ -71,6 +71,7 @@ class SongFragment : BaseFragment<FragmentSongBinding>(R.layout.fragment_song) {
                 if (searchString.length >= 2) {
                     songViewModel.searchSongsPaging(searchString.toString())
                 } else if (searchString.length <= 1) {
+
                     binding.songSearchNoResultTv.isVisible = true
                     songSearchRecyclerView.isVisible = false
                 }

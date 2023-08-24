@@ -51,9 +51,7 @@ class SearchSongPagingAdapter(): PagingDataAdapter<Song, SearchSongPagingAdapter
 
     override fun onBindViewHolder(holder: SearchSongViewHolder, position: Int) {
         val pagedSong = getItem(position)
-        pagedSong?.let {
-            holder.bind(pagedSong)
-        }
+        pagedSong?.let { holder.bind(pagedSong) }
 
     }
 }

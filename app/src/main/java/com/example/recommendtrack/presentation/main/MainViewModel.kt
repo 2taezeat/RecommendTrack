@@ -39,7 +39,7 @@ class MainViewModel @Inject constructor(
 
         workManager.enqueueUniquePeriodicWork(
             TOKEN_WORKER_KEY,
-            ExistingPeriodicWorkPolicy.KEEP,
+            ExistingPeriodicWorkPolicy.UPDATE,
             tokenWorkRequest
         )
     }

@@ -8,14 +8,11 @@ import com.example.recommendtrack.data.datasource.SongRemoteDataSource
 import com.example.recommendtrack.domain.entity.Song
 import com.example.recommendtrack.domain.repository.SongRepository
 import com.example.recommendtrack.utils.Constants.PAGING_SIZE
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 import javax.inject.Inject
 
 class SongRepositoryImp @Inject constructor(
     private val dataSource: SongRemoteDataSource,
-    private val ioDispatcher: CoroutineDispatcher,
 ) : SongRepository {
 
     override suspend fun searchSongsPaging(
@@ -23,7 +20,6 @@ class SongRepositoryImp @Inject constructor(
         songName: String,
         onError: (String) -> Unit,
     ): Flow<PagingData<Song>> {
-        Timber.d("searchSongsPaging")
         val pagingSourceFactory = {
             SongPagingRepository(
                 dataSource = dataSource,
@@ -37,7 +33,7 @@ class SongRepositoryImp @Inject constructor(
             config = PagingConfig(
                 pageSize = PAGING_SIZE,
                 enablePlaceholders = false,
-                maxSize = PAGING_SIZE * 3
+                maxSize = PAGING_SIZE * 10
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow

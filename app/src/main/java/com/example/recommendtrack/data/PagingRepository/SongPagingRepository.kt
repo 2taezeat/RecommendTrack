@@ -6,6 +6,7 @@ import com.example.recommendtrack.data.datasource.SongRemoteDataSource
 import com.example.recommendtrack.data.mapper.ErrorEnvelopeMapper
 import com.example.recommendtrack.data.mapper.SongMapper
 import com.example.recommendtrack.domain.entity.Song
+import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
@@ -13,7 +14,6 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
-import kotlin.random.Random
 
 
 class SongPagingRepository @Inject constructor(
@@ -23,20 +23,12 @@ class SongPagingRepository @Inject constructor(
     private val onError: (String) -> Unit
 ) : PagingSource<Int, Song>() {
 
+
     override fun getRefreshKey(state: PagingState<Int, Song>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
-
-        // Try to find the page key of the closest page to anchorPosition, from
-        // either the prevKey or the nextKey, but you need to handle nullability
-        // here:
-        //  * prevKey == null -> anchorPage is the first page.
-        //  * nextKey == null -> anchorPage is the last page.
-        //  * both prevKey and nextKey null -> anchorPage is the initial page, so
-        //    just return null.
-
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Song> {
@@ -55,29 +47,18 @@ class SongPagingRepository @Inject constructor(
                 offset = offset
             )
 
-            if (Random.nextFloat() < 0.5) {
-                Timber.d("test error")
-                throw Exception("test error !!!")
-            } else {
-                Timber.d("test success")
-
-            }
-
-
-
             response.suspendOnSuccess(SongMapper) {
-                if (this.first.next == null) { nextKey = null }
+                if (this.first.next == null || this.second.isEmpty()) { nextKey = null }
                 songs = this.second
             }.suspendOnFailure {
-                //onError(this.message())
+                onError(this.message())
                 nextKey = null
             }.suspendOnError(ErrorEnvelopeMapper) {
                 val errorMessage = this.message
                 Timber.tag("error").d("$errorMessage")
             }
 
-
-            Timber.d("pagingNum: ${currentPageNumber}, ${ prevKey }, ${nextKey}")
+            Timber.d("pagingNum: ${ prevKey }, ${currentPageNumber}, ${nextKey}")
 
             LoadResult.Page(
                 data = songs,
@@ -91,9 +72,6 @@ class SongPagingRepository @Inject constructor(
         } catch (exception: HttpException) {
             onError("HttpException")
             LoadResult.Error(exception)
-        } catch (testException: Exception) {
-            onError("testException")
-            LoadResult.Error(testException)
         }
 
 
