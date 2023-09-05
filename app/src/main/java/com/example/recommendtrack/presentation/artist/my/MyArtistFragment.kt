@@ -20,7 +20,7 @@ import timber.log.Timber
 class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment_my_artist) {
 
     private lateinit var myArtistRecyclerView: RecyclerView
-    private lateinit var myArtistAdapter: MyArtistAdapter
+    private var myArtistAdapter: MyArtistAdapter? = null
     private val artistViewModel: ArtistViewModel by activityViewModels()
     private var myArtistUpdateCallBack: MyArtistUpdateCallBack? = null
     private lateinit var itemTouchHelper : ItemTouchHelper
@@ -39,18 +39,23 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
         initView()
-
         artistViewModel.myArtists.observe(viewLifecycleOwner, Observer { it ->
-            myArtistAdapter.submitList(it)
+            myArtistAdapter?.submitList(it)
         })
 
     }
 
     override fun onStop() {
         super.onStop()
-        Timber.d("${ myArtistAdapter.currentList }")
-        artistViewModel.updateMyArtists(myArtistAdapter.currentList)
+        Timber.d("${ myArtistAdapter?.currentList }")
+        artistViewModel.updateMyArtists(myArtistAdapter?.currentList ?: emptyList())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        myArtistAdapter = null
     }
 
 
@@ -69,18 +74,14 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
 
     private fun initRecyclerView() {
         Timber.d("initRecyclerView")
-
-        myArtistAdapter = MyArtistAdapter(myArtistUpdateCallBack)
-        myArtistAdapter.apply {
+        myArtistAdapter?.apply {
             submitList(artistViewModel.myArtists.value)
-
-
             setOnItemClickListener {
                 val action = MyArtistFragmentDirections.actionMyArtistFragmentToArtistInfoFragment(it)
                 findNavController().navigate(action)
             }
 
-
+            itemTouchHelper = ItemTouchHelper(ItemTouchCallback( listener = this))
         }
 
         myArtistRecyclerView = binding.myArtistRV.apply {
@@ -90,7 +91,6 @@ class MyArtistFragment : BaseFragment<FragmentMyArtistBinding>(R.layout.fragment
             adapter = myArtistAdapter
         }
 
-        itemTouchHelper = ItemTouchHelper(ItemTouchCallback( listener = myArtistAdapter))
         itemTouchHelper.attachToRecyclerView(myArtistRecyclerView)
     }
 
